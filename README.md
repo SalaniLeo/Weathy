@@ -1,3 +1,3 @@
 # Weather
-Repository for my personal weather website.\n
+Repository for my personal weather website.<br>
 https://weather.salanileo.dev/
