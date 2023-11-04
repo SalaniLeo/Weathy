@@ -1,5 +1,5 @@
-<script lang="JavaScript">
-  import Layout from "./+layout.svelte";
+<script>
+  import { base } from "$app/paths";
   let millisecondsSinceEpoch = Date.now();
 
   let Location = "";
@@ -89,13 +89,15 @@
     hours = hours % 12;
     hours = hours ? hours : 12; // Handle midnight (0 hours)
 
+    console.log(base + "status");
+
     return `${hours}:${minutes} ${ampm}`;
   }
 </script>
 
 <div id="root">
   <div id="weather">
-    <img id="icon" src="src/assets/icons/{icon}" alt="icon" />
+    <img id="icon" src={"/icons/" + icon} alt="icon" />
     <div id="info">
       <p id="location">{Location}</p>
       <p id="temperature">{parseFloat(Temperature).toFixed(1)}{tmp_units}</p>
