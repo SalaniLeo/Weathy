@@ -9,7 +9,7 @@
   let mintemp = "";
   let wspeed = "";
   let feels_like = "";
-  let icon = "";
+  let icon = "weather-clear.svg";
   let pressure = "";
   let humidity = "";
 
