@@ -1,14 +1,17 @@
 <script>
   import "@fortawesome/fontawesome-free/css/all.min.css";
+  import { base } from "$app/paths";
 </script>
 
 <div id="navbar">
-  <a id="home" href="/"><i class="fa-solid fa-house" /></a>
-  <a id="radar" href="/globe"><i class="fa-solid fa-satellite-dish" /></a>
+  <a id="home" href={base + "/"}><i class="fa-solid fa-house" /></a>
+  <a id="radar" href={base + "/globe"}
+    ><i class="fa-solid fa-satellite-dish" /></a
+  >
   <a id="github" href="https://www.github.com/salaniLeo"
     ><i class="fa-brands fa-github" /></a
   >
-  <a id="info" href="/about"><i class="fa-solid fa-circle-info" /></a>
+  <a id="info" href={base + "/about"}><i class="fa-solid fa-circle-info" /></a>
 </div>
 <slot />
 
