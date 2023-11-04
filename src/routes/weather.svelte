@@ -97,7 +97,7 @@
 
 <div id="root">
   <div id="weather">
-    <img id="icon" src={"/icons/" + icon} alt="icon" />
+    <img id="icon" src={base + "/icons/" + icon} alt="icon" />
     <div id="info">
       <p id="location">{Location}</p>
       <p id="temperature">{parseFloat(Temperature).toFixed(1)}{tmp_units}</p>
