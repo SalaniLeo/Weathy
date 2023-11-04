@@ -91,6 +91,6 @@
 </script>
 
 <div id="map">
-  <img {src} alt="map" height="500px" />
+  <img {src} alt="map" />
   <!-- Thanks to http://www.persicetometeo.com/ for the base code. -->
 </div>

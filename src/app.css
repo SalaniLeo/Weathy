@@ -9,3 +9,41 @@
     outline: 1px solid wheat;
 
 }
+
+.rect {
+  font-size: 14px;
+  font-weight: 900;
+  text-align: center;
+  width: min-content;
+  height: 190px;
+  background-color: rgb(22, 22, 22);
+  line-height: 0px;
+  border-radius: 7.5px;
+}
+
+.coverImg {
+  width: 200px;
+  position: relative;
+  top: 50%;
+  transform: translateY(-60%);
+}
+
+.border {
+  padding: 2px;
+  border: 1px solid wheat;
+}
+
+#innerRow{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.wide{
+  transform: translateY(10%);
+}
+.row {
+  text-align: center;
+}

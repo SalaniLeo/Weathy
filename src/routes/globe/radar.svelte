@@ -2,55 +2,63 @@
 </script>
 
 <div id="root">
-  <div id="radar">
-    <h1>Radar - Italy | Europe | North America</h1>
+  <div class="row">
+    <div>
+      <h1>Radar - Italy | Europe | North America</h1>
+    </div>
 
-    <a
-      href="javascript:window.open('https://cdn4.3bmeteo.com/images/radar/VMI_animation.gif','','scrollbars=no,width=1024,height=768');void('');"
-    >
-      <img
-        src="https://cdn4.3bmeteo.com/images/radar/VMI_animation.gif"
-        alt="protezione civile"
-      />
-    </a>
+    <div id="innerRow">
+      <div class="rect border">
+        <p>Radar Protezione Civile</p>
+        <a
+          href="javascript:window.open('https://cdn4.3bmeteo.com/images/radar/VMI_animation.gif','','scrollbars=no,width=1265,height=955');void('');"
+        >
+          <img
+            class="coverImg"
+            src="https://cdn4.3bmeteo.com/images/radar/VMI_animation.gif"
+            alt="ingrandisci"
+          />
+        </a>
+      </div>
 
-    <a
-      href="javascript:window.open('https://api.sat24.com/animated/IT/snow/3','','scrollbars=no,width=750,height=546');void('');"
-      ><img
-        src="https://api.sat24.com/animated/IT/snow/3"
-        alt="Italy - SAT24"
-      /></a
-    >
+      <div class="rect border">
+        <p>Radar Sat24 - Emustat</p>
+        <a
+          href="javascript:window.open('https://api.sat24.com/animated/IT/snow/3','','scrollbars=no,width=1265,height=955');void('');"
+        >
+          <img
+            class="coverImg"
+            src="https://api.sat24.com/animated/IT/snow/3"
+            alt="ingrandisci"
+          />
+        </a>
+      </div>
 
-    <a
-      href="javascript:window.open('https://api.sat24.com/animated/EU/snow/3','','scrollbars=no,width=750,height=546');void('');"
-      ><img
-        src="https://api.sat24.com/animated/EU/snow/3"
-        alt="Europe - SAT24"
-      /></a
-    >
+      <div class="rect border">
+        <p>Radar Sat24 - Emustat</p>
+        <a
+          href="javascript:window.open('https://api.sat24.com/animated/EU/snow/3','','scrollbars=no,width=1265,height=955');void('');"
+        >
+          <img
+            class="coverImg"
+            src="https://api.sat24.com/animated/EU/snow/3"
+            alt="ingrandisci"
+          />
+        </a>
+      </div>
 
-    <a
-      href="javascript:window.open('https://radar.weather.gov/ridge/standard/CONUS_loop.gif','','scrollbars=no,width=750,height=546');void('');"
-      ><img
-        src="https://radar.weather.gov/ridge/standard/CONUS_loop.gif"
-        alt="United States - weather.gov"
-      /></a
-    >
+      <div class="rect border">
+        <p>Radar USA weather.gov</p>
+        <a
+          href="javascript:window.open('https://radar.weather.gov/ridge/standard/CONUS_loop.gif','','scrollbars=no,width=1265,height=955');void('');"
+        >
+          <img
+            class="coverImg"
+            src="https://radar.weather.gov/ridge/standard/CONUS_loop.gif"
+            alt="ingrandisci"
+          />
+        </a>
+      </div>
+    </div>
   </div>
 </div>
-
-<style>
-  img {
-    outline: 3px solid wheat;
-    position: relative;
-    width: auto;
-    height: 200px;
-    cursor: pointer;
-    margin: 10px;
-    margin-right: 50px;
-  }
-  #radar {
-    padding: 40px;
-  }
-</style>

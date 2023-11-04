@@ -1,6 +1,5 @@
 <script>
   import { base } from "$app/paths";
-  let millisecondsSinceEpoch = Date.now();
 
   let Location = "";
   let Temperature = "";
@@ -40,7 +39,6 @@
       let code = data["weather"][0]["icon"];
       pressure = data["main"]["pressure"];
       humidity = data["main"]["humidity"];
-      console.log(code);
       icon = mapWeatherIconToName(code);
     });
 
@@ -88,8 +86,6 @@
     let ampm = hours >= 12 ? "PM" : "AM";
     hours = hours % 12;
     hours = hours ? hours : 12; // Handle midnight (0 hours)
-
-    console.log(base + "status");
 
     return `${hours}:${minutes} ${ampm}`;
   }
@@ -159,6 +155,7 @@
     width: 250px;
     height: 200px;
     justify-content: center;
+    border-top: solid 1px wheat;
   }
   .top {
     position: relative;
