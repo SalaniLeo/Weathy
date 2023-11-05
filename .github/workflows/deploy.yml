@@ -28,12 +28,13 @@ jobs:
 
       - name: build
         env:
-          BASE_PATH: "/Weather"
+          BASE_PATH: "/weather"
         run: |
           npm run build
+          touch build/.nojekyll
 
       - name: Upload Artifacts
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v1
         with:
           # this should match the `pages` option in your adapter-static options
           path: "build/"
@@ -53,4 +54,4 @@ jobs:
     steps:
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v1
