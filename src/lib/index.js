@@ -2,7 +2,7 @@ import { onMount } from "svelte";
 
 function fetchApi() {
 	return new Promise((resolve) => {
-		resolve(fetch('http://api.openweathermap.org/data/2.5/forecast?lat=44.8268&lon=11.6207&units=metric&appid=72d251b81d30ef572ae667dfe6c4ee1a')
+		resolve(fetch('https://api.openweathermap.org/data/2.5/forecast?lat=44.8268&lon=11.6207&units=metric&appid=72d251b81d30ef572ae667dfe6c4ee1a')
         .then((response)=>response.json())
         .then((responseJson)=>{
 
@@ -44,6 +44,7 @@ function fetchApi() {
   }
 
   let weather = fetchApi();
+  console.log(weather)
 
   function getWeekDays(unix_timestamp)
   {
