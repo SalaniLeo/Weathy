@@ -46,4 +46,24 @@
 }
 .row {
   text-align: center;
+}  
+
+#satellite {
+  width: auto;
+  border-radius: 60px;
+  border-collapse: collapse;
+  overflow: hidden;
+  border: 30px solid rgba(0, 0, 0, 0);
+  outline: 1px solid wheat;
+  outline-offset: -32px;
+}
+#page {
+  position: relative;
+  top: -30px;
+  padding: 25px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 }

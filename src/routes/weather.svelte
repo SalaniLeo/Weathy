@@ -1,5 +1,31 @@
 <script>
   import { base } from "$app/paths";
+  import { onMount } from "svelte";
+  import { mapWeatherIconToName, tmp_units, prss_units } from "../lib/index";
+
+  onMount(async () => {
+    fetch(
+      "https://api.openweathermap.org/data/2.5/weather?q=ferrara&units=metric&appid=72d251b81d30ef572ae667dfe6c4ee1a"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        Location = data["name"];
+        Temperature = data["main"]["temp"];
+        feels_like = data["main"]["feels_like"];
+        cloudValue = data["weather"][0]["description"];
+        maxtemp = data["main"]["temp_max"];
+        mintemp = data["main"]["temp_min"];
+        wspeed = data["main"]["humidity"];
+        wind = data["wind"]["speed"];
+        windDir = data["wind"]["deg"];
+        sunrise = String(convertTime(data["sys"]["sunrise"]));
+        sunset = String(convertTime(data["sys"]["sunset"]));
+        let code = data["weather"][0]["icon"];
+        pressure = data["main"]["pressure"];
+        humidity = data["main"]["humidity"];
+        icon = mapWeatherIconToName(code);
+      });
+  });
 
   let Location = "";
   let Temperature = "";
@@ -17,54 +43,6 @@
   let sunrise = "";
   let sunset = "";
 
-  let tmp_units = "°C";
-  let prss_units = "hPa";
-
-  fetch(
-    "https://api.openweathermap.org/data/2.5/weather?q=ferrara&units=metric&appid=72d251b81d30ef572ae667dfe6c4ee1a"
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      Location = data["name"];
-      Temperature = data["main"]["temp"];
-      feels_like = data["main"]["feels_like"];
-      cloudValue = data["weather"][0]["description"];
-      maxtemp = data["main"]["temp_max"];
-      mintemp = data["main"]["temp_min"];
-      wspeed = data["main"]["humidity"];
-      wind = data["wind"]["speed"];
-      windDir = data["wind"]["deg"];
-      sunrise = String(convertTime(data["sys"]["sunrise"]));
-      sunset = String(convertTime(data["sys"]["sunset"]));
-      let code = data["weather"][0]["icon"];
-      pressure = data["main"]["pressure"];
-      humidity = data["main"]["humidity"];
-      icon = mapWeatherIconToName(code);
-    });
-
-  function mapWeatherIconToName(icon) {
-    const iconToName = {
-      "01d": "weather-clear.svg",
-      "01n": "weather-clear-night.svg",
-      "02d": "weather-few-clouds.svg",
-      "02n": "weather-few-clouds-night.svg",
-      "03d": "weather-many-clouds.svg",
-      "03n": "weather-many-clouds-night.svg",
-      "04d": "weather-clouds.svg",
-      "04n": "weather-clouds-night.svg",
-      "09d": "weather-showers.svg",
-      "09n": "weather-showers-night.svg",
-      "10d": "weather-showers.svg",
-      "10n": "weather-showers-night.svg",
-      "11d": "weather-storm.svg",
-      "11n": "weather-storm-night.svg",
-      "13d": "weather-snow.svg",
-      "13n": "weather-snow-night.svg",
-      "50d": "weather-mist.svg",
-      "50n": "weather-mist.svg",
-    };
-    return iconToName[icon] || "weather-clear.svg";
-  }
   function toTextualDescription(degree) {
     if (degree > 337.5) return "Northerly";
     if (degree > 292.5) return "North Westerly";
@@ -106,19 +84,24 @@
     </div>
   </div>
   <div id="now" class="top">
-    <h2 class="top">Info</h2>
-    <p id="wind_speed" class="top">Wind speed: {wind}</p>
-    <p id="wind_directions" class="top">
-      Wind direction: {toTextualDescription(windDir)}
-    </p>
-    <p id="pressure" class="top">Pressure: {pressure} {prss_units}</p>
-    <p id="humidity" class="top">Humidity: {humidity}%</p>
-    <p id="sunrise" class="top">Sunrise: {sunrise}</p>
-    <p id="sunrise" class="top">Sunset: {sunset}</p>
+    <details>
+      <summary id="title">Info</summary>
+      <p id="wind_speed" class="top">Wind speed: {wind}</p>
+      <p id="wind_directions" class="top">
+        Wind direction: {toTextualDescription(windDir)}
+      </p>
+      <p id="pressure" class="top">Pressure: {pressure} {prss_units}</p>
+      <p id="humidity" class="top">Humidity: {humidity}%</p>
+      <p id="sunrise" class="top">Sunrise: {sunrise}</p>
+      <p id="sunrise" class="top">Sunset: {sunset}</p>
+    </details>
   </div>
 </div>
 
 <style>
+  #title {
+    font-size: 25px;
+  }
   #info {
     position: relative;
     top: -5px;
@@ -151,9 +134,9 @@
     font-size: 18px;
   }
   #now {
-    padding: 20px;
+    padding-top: 20px;
+    padding-left: 20px;
     width: 250px;
-    height: 200px;
     justify-content: center;
     border-top: solid 1px wheat;
   }
