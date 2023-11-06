@@ -15,6 +15,8 @@
         >
           <img
             class="coverImg"
+            width="200"
+            height="150"
             src="https://cdn4.3bmeteo.com/images/radar/VMI_animation.gif"
             alt="ingrandisci"
           />
@@ -28,6 +30,8 @@
         >
           <img
             class="coverImg"
+            width="200"
+            height="150"
             src="https://api.sat24.com/animated/IT/snow/3"
             alt="ingrandisci"
           />
@@ -41,6 +45,8 @@
         >
           <img
             class="coverImg"
+            width="200"
+            height="150"
             src="https://api.sat24.com/animated/EU/snow/3"
             alt="ingrandisci"
           />
@@ -54,6 +60,8 @@
         >
           <img
             class="coverImg"
+            width="200"
+            height="150"
             src="https://radar.weather.gov/ridge/standard/CONUS_loop.gif"
             alt="ingrandisci"
           />

@@ -21,24 +21,3 @@
     {/await}
   </div>
 </div>
-
-<style>
-  .day {
-    display: flex;
-    gap: 20px;
-  }
-  .max {
-    position: absolute;
-    left: 200px;
-  }
-  .min {
-    position: absolute;
-    left: 260px;
-  }
-  .icon {
-    position: absolute;
-    left: 140px;
-    height: 40px;
-    transform: translateY(5px);
-  }
-</style>

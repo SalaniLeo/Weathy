@@ -28,7 +28,7 @@
 </div>
 
 <style>
-  #top {
+  /* #top {
     position: relative;
     text-align: center;
   }
@@ -66,5 +66,5 @@
     border-top: solid 1px wheat;
     padding: 25px;
     height: 10px;
-  }
+  } */
 </style>

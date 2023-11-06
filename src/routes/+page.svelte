@@ -15,21 +15,10 @@
       <div id="weather"><Weather /></div>
       <div id="forecast"><Forecast /></div>
     </div>
-    <div id="map">
-      <h1>Satellite</h1>
-      <div id="satellite">
-        <Map />
-      </div>
+
+    <div class="container">
+      <h2>Satellite</h2>
+      <Map />
     </div>
   </div>
 </root>
-
-<style>
-  #map {
-    text-align: center;
-    padding: 10px;
-    position: relative;
-    grid-area: 1 / 2 / 2 / 3;
-    height: auto;
-  }
-</style>

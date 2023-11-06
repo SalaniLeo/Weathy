@@ -90,7 +90,6 @@
   }
 </script>
 
-<div id="map">
-  <img {src} alt="map" />
-  <!-- Thanks to http://www.persicetometeo.com/ for the base code. -->
-</div>
+<img {src} id="source" alt="map" />
+
+<!-- Thanks to http://www.persicetometeo.com/ for the base code. -->

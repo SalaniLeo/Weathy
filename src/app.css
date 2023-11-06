@@ -2,30 +2,116 @@
 * {
   color: wheat;
   font-family: "Josefin Sans", sans-serif;
-  
+}
+
+.outline1{
+    outline: 1px solid wheat;
+}
+.outline2{
+  outline: 1px solid wheat;
+}
+
+
+#page{
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px; 
+}
+
+/* LAYOUT */
+
+.darker{
+  background-color: rgb(22, 22, 22);
+}
+
+#navbar{
+  position: fixed;
+  right: 0px;
+  height: 400px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  text-align: center;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 0fr) 1fr repeat(2, 0fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  z-index: 10;
+}
+.shortcut{
+  font-size: 30px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.title{
+  width: 95vw;
+  text-align: center;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom: 2px solid wheat;
+  padding-bottom: 10px;
+}
+
+/* WEATHER */
+#weather{
+  display: grid;
+  grid-template-columns: 0fr 1fr;
+  grid-template-rows: 1fr;
+}
+#info{
+  width: max-content;
+}
+#conditionsIcon{
+  width: 200px !important;
+}
+
+/* FORECAST */
+.day{
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  gap: 15px;
+}
+.name{
+  /* outline: auto; */
+  width: 100px;
+}
+
+/* MAP */
+
+.container{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#source{
+  outline: auto;
+  width: auto;
+  border-radius: 30px;
+  border-collapse: collapse;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0);
+  outline: 1px solid wheat;
+  outline-offset: -1px;
 }
 
 .outline{
-    outline: 1px solid wheat;
+  outline: 1px solid wheat;
 
-}
-
-.rect {
-  font-size: 14px;
-  font-weight: 900;
-  text-align: center;
-  width: min-content;
-  height: 190px;
-  background-color: rgb(22, 22, 22);
-  line-height: 0px;
-  border-radius: 7.5px;
 }
 
 .coverImg {
   width: 200px;
   position: relative;
   top: 50%;
-  transform: translateY(-60%);
 }
 
 .border {
@@ -34,36 +120,97 @@
 }
 
 #innerRow{
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
+  width: 100%;
+  height: fit-content;
+  white-space: nowrap;
+  position: relative;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rect {
+  font-size: 14px;
+  font-weight: 900;
+  text-align: center;
+  background-color: rgb(22, 22, 22);
+  line-height: 0px;
+  border-radius: 7.5px;
+
+  width: fit-content;
+  float: none;
+  height: 90%;
+  margin: 0 0.25%;
+  display: inline-block;
+  zoom: 1;
+
 }
 
 .wide{
-  transform: translateY(10%);
+  transform: translateY(-3%);
 }
-.row {
-  text-align: center;
-}  
 
-#satellite {
-  width: auto;
-  border-radius: 60px;
-  border-collapse: collapse;
-  overflow: hidden;
-  border: 30px solid rgba(0, 0, 0, 0);
-  outline: 1px solid wheat;
-  outline-offset: -32px;
-}
-#page {
-  position: relative;
-  top: -30px;
-  padding: 25px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+@media only screen and (max-width: 960px) {
+  #page{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px; 
+    padding: 10px;
+  }
+
+  .container{
+    padding-left: unset;
+    padding-right: unset;
+  }
+
+  #navbar{
+    position: fixed;
+    bottom: 0px;
+    height: 50px;
+    top: unset;
+    left: 0px;
+    width: 100% ;
+    transform: translateY(0);
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    text-align: center;
+    padding: 0px;
+    padding-top: 15px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 0fr) 1fr repeat(3, 0fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px; 
+  }
+
+  .shortcut{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: unset;
+    margin-bottom: unset;
+  }
+
+  #conditionsIcon{
+    position: relative;
+    top: 20px;
+    height: 100px;
+    width: 100px !important;
+  }
+
+  #source{
+    outline: auto;
+    /* padding: 20px; */
+    
+    width: 100%;
+    border-radius: 10px;
+    border-collapse: collapse;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0);
+    outline: 1px solid wheat;
+    outline-offset: -1px;
+  }
+
 }

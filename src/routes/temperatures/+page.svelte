@@ -60,7 +60,7 @@
     </div>
 
     <div id="innerRow">
-      <div class="rect border">
+      <div class="rect border" style="width: 200px;">
         <p>Maximum temperature</p>
         <a
           href="javascript:window.open('{minTempSource}','','scrollbars=no,width=1265,height=955');void('');"
@@ -73,7 +73,7 @@
           />
           <img
             style="
-          transform: translateY(-20px);"
+            transform: translate(-102%);"
             width="200px"
             src="https://www.weatheronline.co.uk/daten/gifs/rgb_temp_cross.gif"
             alt="ingrandisci"
@@ -81,7 +81,7 @@
         </a>
       </div>
 
-      <div class="rect border">
+      <div class="rect border" style="width: 200px;">
         <p>Minimum temperature</p>
         <a
           href="javascript:window.open('{maxTempSource}','','scrollbars=no,width=1265,height=955');void('');"
@@ -94,7 +94,7 @@
           />
           <img
             style="
-            transform: translateY(-20px);"
+            transform: translate(-102%);"
             width="200px"
             src="https://www.weatheronline.co.uk/daten/gifs/rgb_temp_cross.gif"
             alt="ingrandisci"
@@ -117,3 +117,9 @@
     </div>
   </div>
 </div>
+
+<style>
+  #root {
+    height: 98vh;
+  }
+</style>

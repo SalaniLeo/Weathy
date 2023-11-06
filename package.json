@@ -3,6 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
+		"serve": "vite preview --port 6000",
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",

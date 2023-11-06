@@ -2,6 +2,7 @@
   import { base } from "$app/paths";
   import { onMount } from "svelte";
   import { mapWeatherIconToName, tmp_units, prss_units } from "../lib/index";
+  import "../app.css";
 
   onMount(async () => {
     fetch(
@@ -71,10 +72,10 @@
 
 <div id="root">
   <div id="weather">
-    <img id="icon" src={base + "/icons/" + icon} alt="icon" />
+    <img id="conditionsIcon" src={base + "/icons/" + icon} alt="icon" />
     <div id="info">
-      <p id="location">{Location}</p>
-      <p id="temperature">{parseFloat(Temperature).toFixed(1)}{tmp_units}</p>
+      <h2 id="location">{Location}</h2>
+      <h4 id="temperature">{parseFloat(Temperature).toFixed(1)}{tmp_units}</h4>
       <p id="minmax">
         {parseInt(mintemp)}<i class="fa-solid fa-arrow-down" />, {parseInt(
           maxtemp
@@ -83,9 +84,10 @@
       <p id="feels_like">Feels Like {parseInt(feels_like)}{tmp_units}</p>
     </div>
   </div>
+
   <div id="now" class="top">
     <details>
-      <summary id="title">Info</summary>
+      <summary style="font-size: 25px;">Info</summary>
       <p id="wind_speed" class="top">Wind speed: {wind}</p>
       <p id="wind_directions" class="top">
         Wind direction: {toTextualDescription(windDir)}
@@ -97,54 +99,3 @@
     </details>
   </div>
 </div>
-
-<style>
-  #title {
-    font-size: 25px;
-  }
-  #info {
-    position: relative;
-    top: -5px;
-  }
-  #location {
-    font-size: 35px;
-  }
-  #temperature,
-  #feels_like {
-    position: relative;
-    top: -25px;
-    font-size: 25px;
-  }
-  #icon {
-    width: 200px;
-  }
-  #weather {
-    display: grid;
-    grid-template-columns: 0fr 1fr;
-    grid-template-rows: 1fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-  }
-  #minmax {
-    position: relative;
-    top: -45px;
-  }
-  #feels_like {
-    top: -45px;
-    font-size: 18px;
-  }
-  #now {
-    padding-top: 20px;
-    padding-left: 20px;
-    width: 250px;
-    justify-content: center;
-    border-top: solid 1px wheat;
-  }
-  .top {
-    position: relative;
-    top: -10px;
-  }
-  .fa-solid {
-    font-size: 12px;
-  }
-</style>
