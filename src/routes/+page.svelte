@@ -22,9 +22,3 @@
     </div>
   </div>
 </root>
-
-<style>
-#page{
-  border-top: 2px solid wheat;
-}
-</style>
