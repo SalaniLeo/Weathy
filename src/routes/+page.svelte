@@ -24,7 +24,7 @@
 </root>
 
 <style>
-root{
+#page{
   border-top: 2px solid wheat;
 }
 </style>
