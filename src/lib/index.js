@@ -44,7 +44,6 @@ function fetchApi() {
   }
 
   let weather = fetchApi();
-  console.log(weather)
 
   function getWeekDays(unix_timestamp)
   {
@@ -81,8 +80,12 @@ function fetchApi() {
 
 let tmp_units = "°C";
 let prss_units = "hPa";
+let footer = "" + 
+"Everything here was inspired by <a href='http://www.persicetometeo.com'>" +
+"persicetometeo </a>, visit them for even more informations about global weather!" 
 
 export { weather }
 export { mapWeatherIconToName }
 export { tmp_units }
 export { prss_units }
+export { footer }

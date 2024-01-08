@@ -1,5 +1,6 @@
 <script>
   import { base } from "$app/paths";
+  import { footer } from "$lib/index";
 
   let data = new Date();
   let mese = data.getUTCMonth() + 1;
@@ -16,6 +17,8 @@
   let maxTempSource = `https://www.weatheronline.co.uk/images/charts/en/contour/${date}/euro/euro/1699127127/vtn.gif`;
   let minTempSource = `https://www.weatheronline.co.uk/images/charts/en/contour/${date}/euro/euro/1699127127/vtx.gif`;
 </script>
+
+<title>SalaniLeo's Weather - Temperatures</title>
 
 <div id="root">
   <div class="row" style="margin-bottom: 50px;">
@@ -116,10 +119,7 @@
       </div>
     </div>
   </div>
+  <footer>
+    {footer}
+  </footer>
 </div>
-
-<style>
-  #root {
-    height: 98vh;
-  }
-</style>

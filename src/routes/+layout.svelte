@@ -3,6 +3,7 @@
   import { base } from "$app/paths";
 </script>
 
+<p id="mobiletopbar" />
 <h1 class="title">SalaniLeo's Weather</h1>
 <div class="darker outline1" id="navbar">
   <a class="shortcut" id="home" href={base + "/"}

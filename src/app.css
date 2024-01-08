@@ -94,7 +94,7 @@
 
 #source{
   outline: auto;
-  width: auto;
+  height: 850px;
   border-radius: 30px;
   border-collapse: collapse;
   overflow: hidden;
@@ -148,6 +148,11 @@
 
 .wide{
   transform: translateY(-3%);
+}
+
+
+#mobiletopbar{
+  display: none;
 }
 
 @media only screen and (max-width: 960px) {
@@ -212,5 +217,21 @@
     outline: 1px solid wheat;
     outline-offset: -1px;
   }
+
+  footer{
+    margin-bottom: 100px;
+    vertical-align: top;
+    text-align: center;
+  }
+
+#mobiletopbar{
+  position: fixed;
+  top: -15px;
+  left: 0px;
+  width: 100vw;
+  border-top: 1px solid wheat;
+  display: flex;
+  z-index: 10;
+}
 
 }
