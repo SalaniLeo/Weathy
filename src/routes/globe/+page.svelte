@@ -21,7 +21,4 @@
       <Stuff />
     </div>
   </div>
-  <footer>
-    {footer}
-  </footer>
 </div>

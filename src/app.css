@@ -92,15 +92,35 @@
   padding-right: 30px;
 }
 
-#source{
-  outline: auto;
-  height: 850px;
+.map{
+  overflow: hidden;
+  height: 657px;
+  width: 885px;
   border-radius: 30px;
   border-collapse: collapse;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0);
   outline: 1px solid wheat;
   outline-offset: -1px;
+}
+
+.mapcontent{
+  height: 657px;
+}
+
+#source{
+  z-index: -1;
+  width: 100%;
+  position: relative;
+  height: 130%;
+  top: -20%;
+  width: 107.6%;
+  left: -6%;
+}
+
+#overlay{
+  position: absolute;
+  width: auto;
 }
 
 .outline{

@@ -80,9 +80,7 @@ function fetchApi() {
 
 let tmp_units = "°C";
 let prss_units = "hPa";
-let footer = "" + 
-"Everything here was inspired by <a href='http://www.persicetometeo.com'>" +
-"persicetometeo </a>, visit them for even more informations about global weather!" 
+let footer = "Everything here was inspired by <a href='http://www.persicetometeo.com'>persicetometeo</a>, visit them for even more informations about global weather!" 
 
 export { weather }
 export { mapWeatherIconToName }
