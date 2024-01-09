@@ -63,14 +63,19 @@
     if (minutes[i] == "00") {
       ora = ora + 1;
     }
-    let time = ora + "" + minutes[i];
+
+    let time = format(ora) + "" + minutes[i];
 
     if (oraTMP == ora + 1 && minutes[i] + 15 > minuti) {
       ora = oraTMP - 3;
       i = 0;
     }
-
+    console.log(time);
     return time;
+  }
+
+  function format(num) {
+    return num < 10 ? "0" + num.toString() : num.toString();
   }
 
   call();
