@@ -1,8 +1,14 @@
 import { onMount } from "svelte";
+import Cookies from 'js-cookie'
+
+
+let refreshrate = (Cookies.get('refreshrate')!=undefined) ? Cookies.get('refreshrate') : 500;
+let location = (Cookies.get('location')!=undefined) ? Cookies.get('location') : "Ferrara";
+
 
 function fetchApi() {
 	return new Promise((resolve) => {
-		resolve(fetch('https://api.openweathermap.org/data/2.5/forecast?lat=44.8268&lon=11.6207&units=metric&appid=72d251b81d30ef572ae667dfe6c4ee1a')
+		resolve(fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=72d251b81d30ef572ae667dfe6c4ee1a`)
         .then((response)=>response.json())
         .then((responseJson)=>{
 
@@ -81,7 +87,25 @@ function fetchApi() {
 let tmp_units = "°C";
 let prss_units = "hPa";
 let footer = "Everything here was inspired by <a href='http://www.persicetometeo.com'>persicetometeo</a>, visit them for even more informations about global weather!" 
-let refreshrate = 500
+
+function setRefreshRate(value){
+	Cookies.set('refreshrate', value)
+	refreshrate = value
+}
+
+function setLocation(value){
+	Cookies.set('location', value)
+	location = value
+	window.location.reload()
+}
+
+function setCookie(name, args){
+	Cookies.set(name, args)
+}
+
+function getCookie(name){
+	return Cookies.get(name)
+}
 
 export { weather }
 export { mapWeatherIconToName }
@@ -89,3 +113,8 @@ export { tmp_units }
 export { prss_units }
 export { footer }
 export { refreshrate }
+export { setRefreshRate }
+export { setCookie }
+export { getCookie }
+export { location }
+export { setLocation }

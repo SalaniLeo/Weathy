@@ -12,7 +12,6 @@
   }
 
   let date = anno + "" + mese + "" + giorno;
-  console.log(date);
 
   let maxTempSource = `https://www.weatheronline.co.uk/images/charts/en/contour/${date}/euro/euro/1699127127/vtn.gif`;
   let minTempSource = `https://www.weatheronline.co.uk/images/charts/en/contour/${date}/euro/euro/1699127127/vtx.gif`;

@@ -2,7 +2,6 @@
   import Radar from "./radar.svelte";
   import Meteosat from "./meteosat.svelte";
   import Stuff from "./various.svelte";
-  import { footer } from "$lib/index";
 </script>
 
 <title>SalaniLeo's Weather - Globe</title>

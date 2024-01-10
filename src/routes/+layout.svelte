@@ -3,6 +3,14 @@
   import { base } from "$app/paths";
   import Background from "$lib/background.svelte";
   import { onMount } from "svelte";
+  import {
+    getCookie,
+    refreshrate,
+    setCookie,
+    setLocation,
+    setRefreshRate,
+    location,
+  } from "$lib";
 
   export let color = "white";
   export let mixBlendMode = "difference";
@@ -24,59 +32,100 @@
     );
   }
 
-  onMount(() => {
-    if (!isMobile()) {
-      const initCursor = () => {
-        document.addEventListener("mousemove", (e) => {
-          x = e.clientX;
-          y = e.clientY;
-        });
-        const hoverables = document.querySelectorAll(".hover, .shortcut");
-        hoverables.forEach((hoverable) => {
-          hoverable.addEventListener("mouseenter", () => {
-            shape = "polygon(0% 0%, 10% 90%, 28% 55%, 70% 50%)";
-            height += 10;
-            width += 10;
-            trans = "all 0s cubic-bezier(0.28, 0.8, 0.36, 1)";
-            document.body.style.cursor = "none";
-          });
-          hoverable.addEventListener("mouseleave", () => {
-            trans = " all 0s cubic-bezier(0.28, 0.8, 0.36, 1)";
-            shape = "circle(50% at 50% 50%)";
-            height -= 10;
-            width -= 10;
-          });
-        });
-      };
+  // onMount(() => {
+  //   if (!isMobile()) {
+  //     const initCursor = () => {
+  //       document.addEventListener("mousemove", (e) => {
+  //         x = e.clientX;
+  //         y = e.clientY;
+  //       });
+  //       const hoverables = document.querySelectorAll(".hover, .shortcut");
+  //       hoverables.forEach((hoverable) => {
+  //         hoverable.addEventListener("mouseenter", () => {
+  //           shape = "polygon(0% 0%, 10% 90%, 28% 55%, 70% 50%)";
+  //           height += 10;
+  //           width += 10;
+  //           trans = "all 0s cubic-bezier(0.28, 0.8, 0.36, 1)";
+  //           document.body.style.cursor = "none";
+  //         });
+  //         hoverable.addEventListener("mouseleave", () => {
+  //           trans = " all 0s cubic-bezier(0.28, 0.8, 0.36, 1)";
+  //           shape = "circle(50% at 50% 50%)";
+  //           height -= 10;
+  //           width -= 10;
+  //         });
+  //       });
+  //     };
 
-      initCursor();
-    }
-  });
+  //     initCursor();
+  //   }
+  // });
   let currentTheme = "";
 
   onMount(() => {
-    const userPrefersDarkMode = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-
-    const hasUserSetDarkModeManually =
-      document.documentElement.dataset.theme == "dark";
-
-    if (!hasUserSetDarkModeManually) {
-      setTheme(userPrefersDarkMode ? "dark" : "light");
+    if (getCookie("theme") != "") {
+      currentTheme = getCookie("theme");
+      document.documentElement.dataset.theme == currentTheme;
+      setTheme(currentTheme, false);
     }
   });
 
-  const setTheme = (theme) => {
+  const setTheme = (theme, save) => {
     document.documentElement.dataset.theme = theme;
-    document.cookie = `siteTheme=${theme};domain=.salanileo.dev; path=/`;
     currentTheme = theme;
+    if (save) setCookie("theme", theme);
   };
+  import Modal from "../lib/Modal.svelte";
+
+  let showModal = false;
+  let refreshratetmp = refreshrate;
+  let locationtmp = location;
 </script>
 
-<p id="mobiletopbar" />
 <h1 class="title">SalaniLeo's Weather</h1>
-<div class="darker outline" id="navbar">
+<button
+  id="settingsBtn"
+  class="container hover"
+  style="padding: 7px; !important"
+  on:click={() => (showModal = true)}
+>
+  <i class="fa-solid fa-gear"></i>
+</button>
+
+<Modal bind:showModal>
+  <h2 slot="header">
+    Settings <i
+      class="fa-solid fa-circle"
+      style="scale: 40%; top: 3px; position: relative;"
+    ></i>
+    <i
+      class="fa-solid fa-arrow-turn-up"
+      style="rotate: 90deg; top: 5px; position: relative; margin-left: 5px; margin-right: 5px"
+    ></i> to apply
+  </h2>
+  <div id="grid">
+    <div class="settingsGrid">
+      <p>Map refresh rate (ms):</p>
+      <p>Location:</p>
+    </div>
+    <div class="settingsGrid">
+      <form
+        class="textInput"
+        on:submit|preventDefault={() => setRefreshRate(refreshratetmp)}
+      >
+        <input type="text" class="textInput" bind:value={refreshratetmp} />
+      </form>
+      <form
+        class="textInput"
+        on:submit|preventDefault={() => setLocation(locationtmp)}
+      >
+        <input type="text" class="textInput" bind:value={locationtmp} />
+      </form>
+    </div>
+  </div>
+</Modal>
+
+<div class="darker container" id="navbar" style="box-shadow: unset;">
   <a class="shortcut" id="home" href={base + "/"}
     ><i class="fa-solid fa-house" /></a
   >
@@ -99,7 +148,7 @@
     href={base + "/about"}><i class="fa-solid fa-circle-info" /></a
   >
   {#if currentTheme == "light"}
-    <a class="moon icon" href={"#"} on:click={() => setTheme("dark")}>
+    <a class="moon icon" href={"#"} on:click={() => setTheme("dark", true)}>
       <img
         src={base + "/icons/sun.png"}
         alt="theme"
@@ -108,7 +157,7 @@
       />
     </a>
   {:else}
-    <a class="sun icon" href={"#"} on:click={() => setTheme("light")}>
+    <a class="sun icon" href={"#"} on:click={() => setTheme("light", true)}>
       <img
         src={base + "/icons/moon.png"}
         alt="theme"

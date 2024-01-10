@@ -1,12 +1,17 @@
 <script>
   import { base } from "$app/paths";
   import { onMount } from "svelte";
-  import { mapWeatherIconToName, tmp_units, prss_units } from "../lib/index";
+  import {
+    mapWeatherIconToName,
+    tmp_units,
+    prss_units,
+    location,
+  } from "../lib/index";
   import "../app.css";
 
   onMount(async () => {
     fetch(
-      "https://api.openweathermap.org/data/2.5/weather?q=ferrara&units=metric&appid=72d251b81d30ef572ae667dfe6c4ee1a"
+      `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=72d251b81d30ef572ae667dfe6c4ee1a`
     )
       .then((response) => response.json())
       .then((data) => {

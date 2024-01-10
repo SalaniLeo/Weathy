@@ -14,8 +14,8 @@
         <div class="day">
           <p class="name">{name}</p>
           <img alt="icon" src={base + "/icons/" + icon} />
-          <p class="max" style="width: 35px;">{maxTemp}{tmp_units}</p>
-          <p class="min" style="width: 35px;">{minTemp}{tmp_units}</p>
+          <p class="max">{maxTemp}{tmp_units}</p>
+          <p class="min">{minTemp}{tmp_units}</p>
         </div>
       {/each}
     {/await}

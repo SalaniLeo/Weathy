@@ -31,7 +31,7 @@
 
       let hours = time.substring(0, 2);
       let cut = time.substring(2);
-      formattedTime = hours + ":" + cut;
+      formattedTime = parseInt(hours) + 1 + ":" + cut;
 
       generateQuery("satellite-europe", "europe");
       i = i + 1;
@@ -39,14 +39,28 @@
   }
 
   generateQuery("satellite-europe", "europe");
+
+  let isOpen = "";
+
+  function toggleSummary() {
+    if (isOpen == true) {
+      isOpen = "";
+    } else {
+      isOpen = true;
+    }
+  }
 </script>
 
 <details class="container">
-  <summary style="font-size: 25px;" class="hover"
-    >Satellite (Europe) - {formattedTime}</summary
+  <summary
+    on:click={toggleSummary}
+    style="font-size: 25px;"
+    class:open={isOpen}
   >
+    Satellite (Europe) {isOpen && ` - ${formattedTime}`}
+  </summary>
   <div class="map outline">
     <img src={overlayEurope} alt="overlay" id="overlay" class="mapSize" />
-    <img src={imageSource} alt="mapEurope" id="mapEurope" class="map" />
+    <img src={imageSource} alt="mapEurope" id="sourceEurope" />
   </div>
 </details>

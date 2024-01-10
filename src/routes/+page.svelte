@@ -11,11 +11,11 @@
 
 <root>
   <div id="page">
-    <div id="meteo" class="a">
+    <div id="meteo">
       <div id="weather"><Weather /></div>
       <div id="forecast"><Forecast /></div>
     </div>
-    <div id="satellite" class="a">
+    <div id="satellite">
       <div id="maps"><Maps /></div>
     </div>
   </div>
