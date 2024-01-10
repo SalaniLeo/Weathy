@@ -27,7 +27,7 @@
     </div>
 
     <div id="innerRow">
-      <div class="rect border">
+      <div class="rect container">
         <p>Avarage temperature</p>
         <a
           href="javascript:window.open('https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/regional_monitoring/1cavg1.png','','scrollbars=no,width=1265,height=955');void('');"
@@ -41,7 +41,7 @@
         </a>
       </div>
 
-      <div class="rect border">
+      <div class="rect container">
         <p>Temperature anomaly</p>
         <a
           href="javascript:window.open('https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/regional_monitoring/1ctan1.png','','scrollbars=no,width=1265,height=955');void('');"
@@ -63,7 +63,7 @@
     </div>
 
     <div id="innerRow">
-      <div class="rect border" style="width: 200px;">
+      <div class="rect container" style="width: 200px;">
         <p>Maximum temperature</p>
         <a
           href="javascript:window.open('{minTempSource}','','scrollbars=no,width=1265,height=955');void('');"
@@ -84,7 +84,7 @@
         </a>
       </div>
 
-      <div class="rect border" style="width: 200px;">
+      <div class="rect container" style="width: 200px;">
         <p>Minimum temperature</p>
         <a
           href="javascript:window.open('{maxTempSource}','','scrollbars=no,width=1265,height=955');void('');"
@@ -104,7 +104,7 @@
           />
         </a>
       </div>
-      <div class="rect border">
+      <div class="rect container">
         <p>Temperature anomaly</p>
         <a
           href="javascript:window.open('https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/regional_monitoring/wctan1.png','','scrollbars=no,width=1265,height=955');void('');"

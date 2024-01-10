@@ -25,7 +25,6 @@
   #center {
     text-align: center;
     position: relative;
-    /* width: 1200px; */
     height: 200px;
     padding: 50px;
     top: 50%;

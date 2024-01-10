@@ -71,7 +71,7 @@
 </script>
 
 <div id="root">
-  <div id="weather">
+  <div id="weather" class="container">
     <img id="conditionsIcon" src={base + "/icons/" + icon} alt="icon" />
     <div id="info">
       <h2 id="location">{Location}</h2>
@@ -85,17 +85,17 @@
     </div>
   </div>
 
-  <div id="now" class="top">
+  <div id="now" class="container">
     <details>
-      <summary style="font-size: 25px;">Info</summary>
-      <p id="wind_speed" class="top">Wind speed: {wind}</p>
-      <p id="wind_directions" class="top">
+      <summary style="font-size: 25px;" class="hover">Info</summary>
+      <p id="wind_speed">Wind speed: {wind}</p>
+      <p id="wind_directions">
         Wind direction: {toTextualDescription(windDir)}
       </p>
-      <p id="pressure" class="top">Pressure: {pressure} {prss_units}</p>
-      <p id="humidity" class="top">Humidity: {humidity}%</p>
-      <p id="sunrise" class="top">Sunrise: {sunrise}</p>
-      <p id="sunrise" class="top">Sunset: {sunset}</p>
+      <p id="pressure">Pressure: {pressure} {prss_units}</p>
+      <p id="humidity">Humidity: {humidity}%</p>
+      <p id="sunrise">Sunrise: {sunrise}</p>
+      <p id="sunrise">Sunset: {sunset}</p>
     </details>
   </div>
 </div>

@@ -9,13 +9,12 @@
     </div>
 
     <div id="innerRow">
-      <div class="rect border">
+      <div class="rect container">
         <p>Sat24 infrared</p>
         <a
           href="javascript:window.open('http://www.persicetometeo.com/public/popup/eu_animazione_ir2013.htm','','scrollbars=no,width=1265,height=955');void('');"
         >
           <img
-            class="coverImg"
             src="http://sat24.com/image2.ashx?region=eu&amp;ir=true"
             width="200"
             height="150"
@@ -24,13 +23,12 @@
         >
       </div>
 
-      <div class="rect border">
+      <div class="rect container">
         <p>Sat24 precipitations</p>
         <a
           href="javascript:window.open('http://www.persicetometeo.com/public/eu_animazione_termica_HD.html','','scrollbars=no,width=1265,height=955');void('');"
         >
           <img
-            class="coverImg"
             src="https://it.sat24.com/image?type=km&region=eu&type=km&region=eu"
             width="200"
             height="150"
@@ -39,7 +37,7 @@
         >
       </div>
 
-      <div class="rect border">
+      <div class="rect container">
         <p>persicetometeo pacific precipitations</p>
         <a
           href="javascript:window.open('http://www.persicetometeo.com/public/popup/natl_precipitable_water.htm','','scrollbars=no,width=1004,height=472');void('');"

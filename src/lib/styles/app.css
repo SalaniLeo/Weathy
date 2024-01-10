@@ -1,0 +1,268 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap");
+* {
+  color: black;
+  font-family: "Josefin Sans", sans-serif;
+}
+
+:root{
+  --main-color: rgb(24, 24, 24);
+  --background-color: #efefef;
+  --darker-background: #a1a1a1;
+  --card-background: #a1a1a1;
+}
+
+body {
+  background-color: var(--background-color);
+}
+
+.outline{
+  outline: 2px solid var(--main-color);
+
+}
+
+.darker{
+  background-color: var(--darker-background);
+}
+
+.container{
+  padding: 10px;
+  border-radius: 10px;
+  width: fit-content;
+  background-color: var(--card-background);
+  border: 3px solid black;
+  box-shadow: 3px 3px 0px black;
+  transition-duration: 0.15s;
+  margin-bottom: 15px;
+}
+
+.container:hover{
+  box-shadow: 0px 0px 0px black;
+}
+
+#page{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px; 
+}
+
+/* navbar */
+#navbar{
+  position: fixed;
+  right: 0px;
+  height: 400px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  text-align: center;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 0fr) 1fr repeat(2, 0fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  z-index: 10;
+}
+.shortcut{
+  font-size: 30px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.title{
+  width: 95vw;
+  text-align: center;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom: 2px solid var(--main-color);
+  padding-bottom: 10px;
+}
+
+
+/* WEATHER */
+#weather{
+  display: grid;
+  grid-template-columns: 0fr 1fr;
+  grid-template-rows: 1fr;
+}
+#info{
+  width: max-content;
+}
+#conditionsIcon{
+  width: 200px !important;
+  left: -10px;
+  position: relative;
+}
+
+
+/* FORECAST */
+.day{
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  gap: 15px;
+}
+.name{
+  width: 100px;
+}
+
+
+/* satellite map */
+
+#satellite{
+}
+
+.map{
+  overflow: hidden;
+  height: 657px;
+  width: 885px;
+  border-radius: 30px;
+  border-collapse: collapse;
+  overflow: hidden;
+  border: 3px solid rgba(0, 0, 0, 0);
+  outline: 3px solid var(--main-color);
+  outline-offset: -3px;
+}
+
+.mapcontent{
+  height: 657px;
+}
+
+#source{
+  width: 100%;
+  position: relative;
+  height: 130%;
+  top: -20%;
+  width: 107.6%;
+  left: -6%;
+}
+
+#overlay{
+  z-index: 1;
+  position: absolute;
+  width: auto;
+}
+
+.coverImg {
+  width: 199px;
+}/*fdsfsdfsdfsdfsdfsdfsfsdfsfdsf*/
+
+#innerRow{
+  width: 100%;
+  height: 210px;
+  white-space: nowrap;
+  position: relative;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rect {
+  font-size: 14px;
+  font-weight: 900;
+  text-align: center;
+  background-color: var(--card-background);
+  line-height: 0px;
+  border-radius: 7.5px;
+  padding: 2px !important;
+  width: fit-content;
+  float: none;
+  height: auto;
+  margin: 0 0.25%;
+  display: inline-block;
+  zoom: 1;
+
+}
+
+.wide{
+  transform: translateY(-3%);
+}
+
+
+#mobiletopbar{
+  display: none;
+}
+
+@media only screen and (max-width: 960px) {
+  #page{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px; 
+    padding: 10px;
+  }
+
+  .container{
+    padding-left: unset;
+    padding-right: unset;
+  }
+
+  #navbar{
+    position: fixed;
+    bottom: 0px;
+    height: 50px;
+    top: unset;
+    left: 0px;
+    width: 100% ;
+    transform: translateY(0);
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    text-align: center;
+    padding: 0px;
+    padding-top: 15px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 0fr) 1fr repeat(3, 0fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px; 
+  }
+
+  .shortcut{
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: unset;
+    margin-bottom: unset;
+  }
+
+  #conditionsIcon{
+    position: relative;
+    top: 20px;
+    height: 100px;
+    width: 100px !important;
+  }
+
+  #source{
+    outline: auto;
+    /* padding: 20px; */
+    
+    width: 100%;
+    border-radius: 10px;
+    border-collapse: collapse;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0);
+    outline: 1px solid var(--main-color);
+    outline-offset: -1px;
+  }
+
+  footer{
+    margin-bottom: 100px;
+    vertical-align: top;
+    text-align: center;
+  }
+
+#mobiletopbar{
+  position: fixed;
+  top: -15px;
+  left: 0px;
+  width: 100vw;
+  border-top: 1px solid var(--main-color);
+  display: flex;
+  z-index: 10;
+}
+
+}

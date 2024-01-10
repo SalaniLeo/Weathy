@@ -8,13 +8,12 @@
     </div>
 
     <div id="innerRow">
-      <div class="rect border">
+      <div class="rect container">
         <p>Radar Protezione Civile</p>
         <a
           href="javascript:window.open('https://cdn4.3bmeteo.com/images/radar/VMI_animation.gif','','scrollbars=no,width=1265,height=955');void('');"
         >
           <img
-            class="coverImg"
             width="200"
             height="150"
             src="https://cdn4.3bmeteo.com/images/radar/VMI_animation.gif"
@@ -23,13 +22,12 @@
         </a>
       </div>
 
-      <div class="rect border">
+      <div class="rect container">
         <p>Radar Sat24 - Emustat</p>
         <a
           href="javascript:window.open('https://api.sat24.com/animated/IT/snow/3','','scrollbars=no,width=1265,height=955');void('');"
         >
           <img
-            class="coverImg"
             width="200"
             height="150"
             src="https://api.sat24.com/animated/IT/snow/3"
@@ -38,13 +36,12 @@
         </a>
       </div>
 
-      <div class="rect border">
+      <div class="rect container">
         <p>Radar Sat24 - Emustat</p>
         <a
           href="javascript:window.open('https://api.sat24.com/animated/EU/snow/3','','scrollbars=no,width=1265,height=955');void('');"
         >
           <img
-            class="coverImg"
             width="200"
             height="150"
             src="https://api.sat24.com/animated/EU/snow/3"
@@ -53,13 +50,12 @@
         </a>
       </div>
 
-      <div class="rect border">
+      <div class="rect container">
         <p>Radar USA weather.gov</p>
         <a
           href="javascript:window.open('https://radar.weather.gov/ridge/standard/CONUS_loop.gif','','scrollbars=no,width=1265,height=955');void('');"
         >
           <img
-            class="coverImg"
             width="200"
             height="150"
             src="https://radar.weather.gov/ridge/standard/CONUS_loop.gif"

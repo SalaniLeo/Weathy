@@ -5,17 +5,17 @@
 </script>
 
 <div id="root">
-  <div id="forecast">
-    <h2 id="title">Forecast</h2>
+  <div id="forecast" class="container">
+    <h2 style="line-height: 0px;">Forecast</h2>
     {#await weather}
       Loading...
     {:then content}
       {#each content as { name, icon, maxTemp, minTemp }, i}
         <div class="day">
           <p class="name">{name}</p>
-          <img class="icon" alt="icon" src={base + "/icons/" + icon} />
-          <p class="max">{maxTemp}{tmp_units}</p>
-          <p class="min">{minTemp}{tmp_units}</p>
+          <img alt="icon" src={base + "/icons/" + icon} />
+          <p class="max" style="width: 35px;">{maxTemp}{tmp_units}</p>
+          <p class="min" style="width: 35px;">{minTemp}{tmp_units}</p>
         </div>
       {/each}
     {/await}
