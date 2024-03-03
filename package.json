@@ -2,8 +2,6 @@
 	"name": "wtwb",
 	"version": "1.0",
 	"private": true,
-  	"license": "GPL-3.0",
-	"homepage": "https://weather.salanileo.dev",
 	"scripts": {
 		"serve": "vite preview --port 6000",
 		"dev": "vite dev",
