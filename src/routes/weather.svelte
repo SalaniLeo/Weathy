@@ -6,6 +6,7 @@
     tmp_units,
     prss_units,
     location,
+    speed_units,
   } from "../lib/index";
   import "../app.css";
 
@@ -21,7 +22,7 @@
         cloudValue = data["weather"][0]["description"];
         maxtemp = data["main"]["temp_max"];
         mintemp = data["main"]["temp_min"];
-        wspeed = String(Math.round(data["wind"]["speed"] * 10) / 10) + "m/s";
+        wspeed = String(Math.round(data["wind"]["speed"] * 10) / 10);
         wind = data["wind"]["speed"];
         windDir = data["wind"]["deg"];
         sunrise = String(convertTime(data["sys"]["sunrise"]));
@@ -99,7 +100,7 @@
   <div id="now" class="container">
     <details>
       <summary style="font-size: 25px;" class="hover">Info</summary>
-      <p id="wind_speed">Wind speed: {wind}</p>
+      <p id="wind_speed">Wind speed: {wind} {speed_units}</p>
       <p id="wind_directions">
         Wind direction: {toTextualDescription(windDir)}
       </p>

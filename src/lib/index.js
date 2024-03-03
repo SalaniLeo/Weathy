@@ -87,6 +87,7 @@ function fetchApi() {
 let tmp_units = "°C";
 let prss_units = "hPa";
 let footer = "" 
+let speed_units = "Km/h"
 
 function setRefreshRate(value){
 	Cookies.set('refreshrate', value)
@@ -111,6 +112,7 @@ export { weather }
 export { mapWeatherIconToName }
 export { tmp_units }
 export { prss_units }
+export { speed_units }
 export { footer }
 export { refreshrate }
 export { setRefreshRate }

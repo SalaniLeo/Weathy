@@ -41,7 +41,6 @@
 }
 
 body {
-  overflow-x: hidden;
   background-color: var(--background-color);
 }
 
@@ -173,23 +172,33 @@ body {
   width: 100%;
   position: relative;
   height: 130%;
-  top: -20%;
+  transform: translateY(-93%);
   width: 108.75%;
   left: -6%;
-}
-
-#overlay{
-  border-radius: var(--map-border-radius);
-  z-index: 1;
-  position: absolute;
 }
 
 #sourceEurope{
   position: relative;
   height: 114.25%;
   width: 113%;
-  top: -6%;
   left: -1.5%;
+}
+
+
+#maps{
+  margin-bottom: 75px;
+  width: 97vw;
+  overflow: scroll;
+  margin-right: 0px;
+  padding-left: 0px;
+  border-radius: var(--cnt-border-radius);
+}
+
+#overlay{
+  border-radius: var(--map-border-radius);
+  z-index: 1;
+  position: relative;
+  overflow: scroll;
 }
 
 .coverImg {
@@ -263,6 +272,7 @@ dialog{
   grid-row-gap: 10px; 
 }
 
+
 @media only screen and (max-width: 960px) {
   #page{
     display: grid;
@@ -270,6 +280,10 @@ dialog{
     grid-template-rows: 0fr 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px; 
+  }
+
+  #satellite > .root > .content{
+    scale: 60%;
   }
 
   #navbar{
@@ -303,9 +317,6 @@ dialog{
 
   #meteo{
     width: min-content;
-  }
-  #maps{
-    margin-bottom: 75px;
   }
 
   #conditionsIcon{
