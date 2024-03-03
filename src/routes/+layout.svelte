@@ -60,10 +60,10 @@
   //     initCursor();
   //   }
   // });
-  let currentTheme = "";
+  let currentTheme = "light";
 
   onMount(() => {
-    if (getCookie("theme") != "") {
+    if (getCookie("theme") != null) {
       currentTheme = getCookie("theme");
       document.documentElement.dataset.theme == currentTheme;
       setTheme(currentTheme, false);
@@ -202,5 +202,8 @@
     /* Customize your cursor styles here */
     transition: var(--trans);
     cursor: none;
+  }
+  .settingsGrid {
+    padding-right: 10px;
   }
 </style>
