@@ -86,7 +86,7 @@ function fetchApi() {
 
 let tmp_units = "°C";
 let prss_units = "hPa";
-let footer = "Everything here was inspired by <a href='http://www.persicetometeo.com'>persicetometeo</a>, visit them for even more informations about global weather!" 
+let footer = "" 
 
 function setRefreshRate(value){
 	Cookies.set('refreshrate', value)
@@ -100,7 +100,7 @@ function setLocation(value){
 }
 
 function setCookie(name, args){
-	Cookies.set(name, args)
+	Cookies.set(name, args, { expires: 365 })
 }
 
 function getCookie(name){

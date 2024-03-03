@@ -21,7 +21,7 @@
         cloudValue = data["weather"][0]["description"];
         maxtemp = data["main"]["temp_max"];
         mintemp = data["main"]["temp_min"];
-        wspeed = data["main"]["humidity"];
+        wspeed = String(Math.round(data["wind"]["speed"] * 10) / 10) + "m/s";
         wind = data["wind"]["speed"];
         windDir = data["wind"]["deg"];
         sunrise = String(convertTime(data["sys"]["sunrise"]));
@@ -70,6 +70,12 @@
     let ampm = hours >= 12 ? "PM" : "AM";
     hours = hours % 12;
     hours = hours ? hours : 12; // Handle midnight (0 hours)
+
+    if (minutes < 10) {
+      minutes = `0${minutes}`;
+    }
+
+    console.log(`${hours}:${minutes} ${ampm}`);
 
     return `${hours}:${minutes} ${ampm}`;
   }
