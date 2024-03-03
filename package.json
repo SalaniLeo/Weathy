@@ -1,7 +1,9 @@
 {
 	"name": "wtwb",
-	"version": "0.0.1",
+	"version": "1.0",
 	"private": true,
+  	"license": "GPL-3.0",
+	"homepage": "https://weather.salanileo.dev",
 	"scripts": {
 		"serve": "vite preview --port 6000",
 		"dev": "vite dev",
@@ -18,7 +20,7 @@
 		"svelte": "^4.0.5",
 		"svelte-check": "^3.4.3",
 		"typescript": "^5.0.0",
-		"vite": "^4.5.1"
+		"vite": "^5.0.12"
 	},
 	"type": "module",
 	"dependencies": {
