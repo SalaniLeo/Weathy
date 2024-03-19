@@ -6,17 +6,15 @@
 <div id="root">
   <div id="center">
     <p>
-      This website was made by Leonardo Salani using SvelteKit. I took heavy
-      inspiration from <a href="http://www.persicetometeo.com/"
-        >persicetometeo</a
-      >
-      for all the maps. Go check them out for even more info about global weather.
-      <br /><br />All credits for the maps go to their respective owners<br
-      /><br /><br /><br /><br />Thanks for visiting my website!
+      This website was made by Leonardo Salani using SvelteKit.
+
+      <br />All credits for the maps go to their respective owners<br /><br
+      /><br /><br /><br />Thanks for visiting my website!
     </p>
 
     <p>
-      Go to <a href="https://salaniLeo.dev">salanileo.dev</a> to learn who am I!
+      Don't forget to check out <a href="https://salaniLeo.dev">salanileo.dev</a
+      >!
     </p>
   </div>
 </div>

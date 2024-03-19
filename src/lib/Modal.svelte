@@ -1,4 +1,6 @@
 <script>
+  // @ts-nocheck
+
   export let showModal; // boolean
 
   let dialog; // HTMLDialogElement
@@ -7,23 +9,20 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <dialog
   bind:this={dialog}
   on:close={() => (showModal = false)}
   on:click|self={() => dialog.close()}
   class="outline"
 >
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
   <div on:click|stopPropagation>
     <slot name="header" />
     <hr />
     <slot />
     <hr />
-    <!-- svelte-ignore a11y-autofocus -->
     <button
-      autofocus
       on:click={() => dialog.close()}
-      class="container"
       style="margin-bottom: 0px; margin-top:15px;">Close</button
     >
   </div>
@@ -31,13 +30,15 @@
 
 <style>
   dialog {
-    border-radius: var(--border-radius);
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius-heavy);
     border: none;
-    padding: 0;
-    outline: var(--outline-dark);
+    padding: 0px;
+    outline: 2px solid var(--accent-color-primary);
   }
   dialog::backdrop {
     background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
   }
   dialog > div {
     padding: 1em;
@@ -66,5 +67,7 @@
   }
   button {
     display: block;
+    padding: 10px;
+    border-radius: var(--border-radius-medium);
   }
 </style>

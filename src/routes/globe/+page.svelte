@@ -11,13 +11,18 @@
     <div class="row">
       <Radar />
     </div>
-    <p class="spacer1" />
+    <!-- <p class="spacer1" />
     <div class="row">
       <Meteosat />
-    </div>
-    <p class="spacer2" />
+    </div> -->
     <div class="row">
       <Stuff />
     </div>
   </div>
 </div>
+
+<style>
+  #root {
+    margin: 10px;
+  }
+</style>

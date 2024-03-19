@@ -1,63 +1,32 @@
-<script>
-</script>
-
-<div id="root">
+<div>
   <div class="row">
     <div>
       <h1>Radar - Italy | Europe | North America</h1>
     </div>
 
-    <div id="innerRow">
-      <div class="rect container">
+    <div class="scrollableMapRow">
+      <div class="mapWidgetContainer">
         <p>Radar Protezione Civile</p>
+        <!-- svelte-ignore a11y-invalid-attribute -->
         <a
           href="javascript:window.open('https://cdn4.3bmeteo.com/images/radar/VMI_animation.gif','','scrollbars=no,width=1265,height=955');void('');"
         >
           <img
-            width="200"
-            height="150"
+            class="mapWidget"
             src="https://cdn4.3bmeteo.com/images/radar/VMI_animation.gif"
             alt="ingrandisci"
           />
         </a>
       </div>
 
-      <div class="rect container">
-        <p>Radar Sat24 - Emustat</p>
-        <a
-          href="javascript:window.open('https://api.sat24.com/animated/IT/snow/3','','scrollbars=no,width=1265,height=955');void('');"
-        >
-          <img
-            width="200"
-            height="150"
-            src="https://api.sat24.com/animated/IT/snow/3"
-            alt="ingrandisci"
-          />
-        </a>
-      </div>
-
-      <div class="rect container">
-        <p>Radar Sat24 - Emustat</p>
-        <a
-          href="javascript:window.open('https://api.sat24.com/animated/EU/snow/3','','scrollbars=no,width=1265,height=955');void('');"
-        >
-          <img
-            width="200"
-            height="150"
-            src="https://api.sat24.com/animated/EU/snow/3"
-            alt="ingrandisci"
-          />
-        </a>
-      </div>
-
-      <div class="rect container">
+      <div class="mapWidgetContainer">
         <p>Radar USA weather.gov</p>
+        <!-- svelte-ignore a11y-invalid-attribute -->
         <a
           href="javascript:window.open('https://radar.weather.gov/ridge/standard/CONUS_loop.gif','','scrollbars=no,width=1265,height=955');void('');"
         >
           <img
-            width="200"
-            height="150"
+            class="mapWidget"
             src="https://radar.weather.gov/ridge/standard/CONUS_loop.gif"
             alt="ingrandisci"
           />

@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from "svelte";
   import { weather, tmp_units } from "../lib/index";
   import { base } from "$app/paths";
 </script>

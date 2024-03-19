@@ -1,124 +1,122 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap");
 
 :root{
-  --main-color: rgb(24, 24, 24);
-  --background-color: #efefef;
-  --darker-background: #a1a1a1;
-  --card-background: #a1a1a1;
-  --light-background: #b3b3b3;
-  --text-color: black;
-  --border-color: black;
-  --shadow-color: black;
-  --icon-color: brightness(0%);
-  --box-shadow: 3px 3px 0px var(--shadow-color);
-  --border-radius: 30px;
-  --cnt-border-radius: 10px;
-  --border: 2px solid var(--main-color);
-  --dark-accent: black;
-  --outline-dark: 4px solid var(--dark-accent);
+  /* Used for ui elements background. Use appropriate proportions for each one */
+  --primary-color: #191919;
+  --secondary-color: #242424;
+  --tertiary-color: #4f4f4f;
+
+  /* Used for shadows, under ui elements */
+   --shadow-color-heavy: #0a0a0aad;
+   --shadow-color-medium: #00000080;
+   --shadow-color-light: #00000042;
+
+  /* Used to refine a page colors, to give a personal touch */
+  --accent-color-primary: #494949;
+  --accent-color-secondary: #3b3b3b;
+
+    /* Used to refine a page colors, to give a personal touch */
+  --font-primary-color: #e5e2df;
+  --font-secondary-color: #9d9d9d;
+  --font-link-color: #d9e5e4;
+
+  /* Different elements may need a border, use with caution, might not look good everywhere */
+  --border-width-primary: 6px;
+  --border-width-secondary: 2px;
+
+  --border-radius-light: 2px;
+  --border-radius-medium: 8px;
+  --border-radius-heavy: 16px;
 }
 
-[data-theme="dark"] {
-  --main-color: rgb(24, 24, 24);
-  --background-color: #242424;
-  --darker-background: rgb(22, 22, 22);
-  --light-background: rgb(63, 63, 63);
-  --card-background: rgb(22, 22, 22);
-  --text-color: white;
-  --border-color: black;
-  --shadow-color: black;
-  --icon-color: brightness(1000%);
-  --box-shadow: 3px 3px 0px var(--shadow-color);
-  --cnt-border-radius: 10px;
-  --border: 2px solid var(--main-color);
-  --dark-accent: black;
-  --outline-dark: 4px solid var(--dark-accent);
+[data-theme="light"] {
+
+  /* Used for ui elements background. Use appropriate proportions for each one */
+  --primary-color: #e5e2df;
+  --secondary-color: #fefefe;
+  --tertiary-color: #565656;
+
+  /* Used for shadows, under ui elements */
+  --shadow-color-heavy: #0a0a0ace;
+  --shadow-color-medium: #00000080;
+  --shadow-color-light: #00000042;
+
+  /* Used to refine a page colors, to give a personal touch */
+  --accent-color-primary: #d9e5e4;
+  --accent-color-secondary: #c5e9e6;
+
+  /* Font colors, different types of text need different colors */
+  --font-primary-color: #111111;
+  --font-secondary-color: #636363;
+  --font-link-color: #3d3d3d;
+
+  /* Different elements may need a border, use with caution, might not look good everywhere */
+  --border-width-primary: 6px;
+  --border-width-secondary: 2px;
+
+  --border-radius-light: 2px;
+  --border-radius-medium: 8px;
+  --border-radius-heavy: 16px;
 }
 
 * {
-  color: var(--text-color);
+  color: var(--font-primary-color);
   font-family: "Josefin Sans", sans-serif;
+  transition-duration: 0.25s;
 }
 
 body {
-  background-color: var(--background-color);
+  margin: 0px;
+  background-color: var(--primary-color);
 }
 
-.outline{
-  outline: var(--border);
-
+a {
+  text-decoration: none;
+  color: var(--font-link-color);
 }
 
-.darker{
-  background-color: var(--darker-background);
+button {
+  border-radius: var(--border-radius-heavy);
+  border: none;
+  background-color: var(--accent-color-primary);
+  box-shadow: var(--shadow-color-heavy) 0px 0px 10px;
+  cursor: pointer;
 }
 
-.container{
-  padding: 10px;
-  border-radius: var(--cnt-border-radius);
-  width: fit-content;
-  background-color: var(--card-background);
-  border: 3px solid var(--border-color);
-  box-shadow: var(--box-shadow);
-  transition-duration: 0.15s;
-  margin-bottom: 15px;
-  height: fit-content;
-}
-
-.container:hover{
-  box-shadow: 0px 0px 0px var(--shadow-color);
-}
-
-#page{
+/* Page root, sets the page layout */
+.root{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
-  grid-row-gap: 0px; 
-}
-
-.icon{
-  margin-top: 30px;
-  scale: 200%;
-  filter: var(--icon-color);
-}
-
-/* navbar */
-#navbar{
-  position: fixed;
-  right: 0px;
-  height: 400px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 30px;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-  text-align: center;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(3, 0fr) 1fr repeat(2, 0fr);
-  grid-column-gap: 0px;
   grid-row-gap: 0px;
-  z-index: 10;
 }
-.shortcut{
-  font-size: 30px;
-  margin-top: 5px;
-  margin-bottom: 5px; 
+
+/* Every container, with a shadow and border radius */
+.container{
+  padding: 10px;
+  border-radius: var(--border-radius-heavy);
+  width: fit-content;
+  background-color: var(--secondary-color);
+  box-shadow: var(--shadow-color-light) 0px 0px 3px;
+  transition-duration: 0.15s;
+  margin: 10px;
 }
+
+.container:hover{
+  box-shadow: 0px 0px 3px var(--shadow-color-heavy);
+}
+
+/* Top title, 'Weathy' */
 .title{
   width: 95vw;
   text-align: center;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  border-bottom: var(--border);
-  padding-bottom: 10px;
 }
 
-
-/* WEATHER */
+/* Current weather widget, top left */
 #weather{
   display: grid;
   grid-template-columns: 0fr 1fr;
@@ -128,13 +126,11 @@ body {
   width: max-content;
 }
 #conditionsIcon{
-  width: 200px !important;
-  left: -10px;
-  position: relative;
+  width: 200px;
 }
 
 
-/* FORECAST */
+/* Forecast container, bottom left */
 .day{
   display: flex;
   justify-content: left;
@@ -145,68 +141,10 @@ body {
   width: 100px;
 }
 
-
-/* satellite map */
-.mapSize{
-  height: 657px;
-  width: 885px;
-}
-
-.map{
-  overflow: hidden;
-  height: 657px;
-  width: 885px;
-  border-radius: 30px;
-  border-collapse: collapse;
-  overflow: hidden;
-  border: 3px solid rgba(0, 0, 0, 0);
-  outline: 3px solid var(--main-color);
-  outline-offset: -3px;
-}
-
-.mapcontent{
-  height: 657px;
-}
-
-#source{
+/* Maps inside radar, temperature and meteosat pages */
+.scrollableMapRow {
   width: 100%;
-  position: relative;
-  height: 130%;
-  transform: translateY(-93%);
-  width: 108.75%;
-  left: -6%;
-}
-
-#sourceEurope{
-  position: relative;
-  height: 114.25%;
-  width: 113%;
-  left: -1.5%;
-}
-
-#maps{
-  margin-bottom: 75px;
-  overflow: scroll;
-  margin-right: 0px;
-  padding-left: 0px;
-  border-radius: var(--cnt-border-radius);
-  max-width: 97vw;
-}
-
-#overlay{
-  border-radius: var(--map-border-radius);
-  z-index: 1;
-  position: relative;
-  overflow: scroll;
-}
-
-.coverImg {
-  width: 199px;
-}
-
-#innerRow{
-  width: 100%;
-  height: 210px;
+  height: fit-content;
   white-space: nowrap;
   position: relative;
   overflow-x: scroll;
@@ -214,56 +152,40 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-.rect {
+.mapWidgetContainer {
   font-size: 14px;
   font-weight: 900;
   text-align: center;
-  background-color: var(--card-background);
+  background-color: var(--secondary-color);
   line-height: 0px;
-  border-radius: 7.5px;
+  border-radius: var(--border-radius-medium);
   padding: 2px !important;
-  width: fit-content;
-  float: none;
+  width: min-content;
   height: auto;
   margin: 0 0.25%;
   display: inline-block;
-  zoom: 1;
 }
 
-#settingsBtn{
-  position: fixed;
-  margin: 10px;
-  right: 0px;
-  top: 0px;
-  z-index: 100;
+.mapWidget {
+  border-radius: var(--border-radius-light);
+  margin: 5px;
+  width:200px;
+  height:150px;
 }
 
-dialog{
-  background-color: var(--darker-background);
-}
-
-.textInput{
-  border-radius: var(--cnt-border-radius);
-  background-color: var(--background-color);
-  outline: none;
-  border: none;
-  padding: 10px;
-  transition-duration: 0.25s;
-}
-
-.textInput:focus{
-  background-color: var(--light-background);
-}
-
-#grid{
+/* Option dialog */
+#optionsRoot{
   display: grid;
-  grid-template-columns: 180px 1fr;
+  grid-template-columns: 0.5fr 0.5fr;
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px; 
+  width: 50vw;
+  min-width: 400px;
+  max-width: 600px;
 }
 
-.settingsGrid{
+.optionsContent{
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(5, 1fr);
@@ -271,52 +193,17 @@ dialog{
   grid-row-gap: 10px; 
 }
 
-
-@media only screen and (max-width: 960px) {
-  #page{
+@media only screen and (max-width: 1390px) {
+  .root{
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 0fr 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px; 
   }
+}
 
-  #navbar{
-    position: fixed;
-    bottom: 0px;
-    height: 50px;
-    top: unset;
-    left: 0px;
-    width: 100% ;
-    transform: translateY(0);
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    text-align: center;
-    padding: 0px;
-    padding-top: 15px;
-    bottom: -15px;
-
-    display: grid;
-    grid-template-columns: repeat(3, 0fr) 1fr repeat(3, 0fr);
-    grid-template-rows: 1fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px; 
-  }
-
-  .shortcut{
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: unset;
-    margin-bottom: unset;
-  }
-
-  #meteo{
-    width: min-content;
-  }
-  #maps{
-    margin-bottom: 75px;
-  }
-
+@media only screen and (max-width: 960px) {
   #conditionsIcon{
     position: relative;
     top: 20px;
@@ -328,11 +215,5 @@ dialog{
     margin-left: 10px;
     margin-right: 10px;
   }
-  #settingsBtn{
-    position: fixed;
-    margin: 10px;
-    right: 10px;
-    top: 0px;
-    z-index: 100;
-  }
 }
+

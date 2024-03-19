@@ -1,4 +1,6 @@
 <script>
+  // @ts-nocheck
+
   import { base } from "$app/paths";
   import { onMount } from "svelte";
   import {
@@ -70,7 +72,7 @@
     let minutes = date.getMinutes();
     let ampm = hours >= 12 ? "PM" : "AM";
     hours = hours % 12;
-    hours = hours ? hours : 12; // Handle midnight (0 hours)
+    hours = hours ? hours : 12;
 
     if (minutes < 10) {
       minutes = `0${minutes}`;

@@ -1,16 +1,11 @@
 <script>
   import Weather from "./weather.svelte";
-  import "../app.css";
   import Forecast from "./forecast.svelte";
   import Maps from "$lib/maps/maps.svelte";
 </script>
 
-<head>
-  <title>salaniLeo's Weather</title>
-</head>
-
 <root>
-  <div id="page">
+  <div class="root">
     <div id="meteo">
       <div id="weather"><Weather /></div>
       <div id="forecast"><Forecast /></div>

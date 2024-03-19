@@ -1,10 +1,28 @@
-import { onMount } from "svelte";
+// @ts-nocheck
 import Cookies from 'js-cookie'
+import { writable } from 'svelte/store';
+export const currentTheme = writable("light");
 
+export function setCookie(name, args){
+	Cookies.set(name, args, { expires: 365 });
+}
 
-let refreshrate = (Cookies.get('refreshrate')!=undefined) ? Cookies.get('refreshrate') : 500;
+export function getCookie(name){
+	return Cookies.get(name);
+}
+
+export function setTheme(theme, save) {
+    document.documentElement.dataset.theme = theme;
+    currentTheme.set(theme);
+    if (save) setCookie("theme", theme);
+}
+
+export function getTheme() {
+  console.log(getCookie('theme'))
+  return getCookie('theme');
+}
+
 let location = (Cookies.get('location')!=undefined) ? Cookies.get('location') : "Ferrara";
-
 
 function fetchApi() {
 	return new Promise((resolve) => {
@@ -88,6 +106,8 @@ let tmp_units = "°C";
 let prss_units = "hPa";
 let footer = "" 
 let speed_units = "Km/h"
+let refreshrate = 500
+
 
 function setRefreshRate(value){
 	Cookies.set('refreshrate', value)
@@ -100,23 +120,4 @@ function setLocation(value){
 	window.location.reload()
 }
 
-function setCookie(name, args){
-	Cookies.set(name, args, { expires: 365 })
-}
-
-function getCookie(name){
-	return Cookies.get(name)
-}
-
-export { weather }
-export { mapWeatherIconToName }
-export { tmp_units }
-export { prss_units }
-export { speed_units }
-export { footer }
-export { refreshrate }
-export { setRefreshRate }
-export { setCookie }
-export { getCookie }
-export { location }
-export { setLocation }
+export { weather, mapWeatherIconToName, tmp_units, prss_units, speed_units, footer, refreshrate, setRefreshRate, location, setLocation }
