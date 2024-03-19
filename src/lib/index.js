@@ -120,4 +120,5 @@ function setLocation(value){
 	window.location.reload()
 }
 
+export const name = 'Weathy'
 export { weather, mapWeatherIconToName, tmp_units, prss_units, speed_units, footer, refreshrate, setRefreshRate, location, setLocation }

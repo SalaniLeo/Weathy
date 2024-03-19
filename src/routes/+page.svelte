@@ -2,7 +2,12 @@
   import Weather from "./weather.svelte";
   import Forecast from "./forecast.svelte";
   import Maps from "$lib/maps/maps.svelte";
+  import { name } from "$lib";
 </script>
+
+<head>
+  <title>{name}</title>
+</head>
 
 <root>
   <div class="root">

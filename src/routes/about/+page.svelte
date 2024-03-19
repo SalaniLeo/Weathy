@@ -1,8 +1,11 @@
 <script>
+  import { name } from "$lib";
+  import { page } from "$app/stores";
 </script>
 
-<title>SalaniLeo's Weather - About</title>
-
+<head>
+  <title>{name + $page.url.pathname.replace("/", " - ")}</title>
+</head>
 <div id="root">
   <div id="center">
     <p>

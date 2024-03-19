@@ -13,9 +13,13 @@
 
   // let maxTempSource = `https://www.weatheronline.co.uk/images/charts/en/contour/${date}/euro/euro/1699127127/vtn.gif`;
   // let minTempSource = `https://www.weatheronline.co.uk/images/charts/en/contour/${date}/euro/euro/1699127127/vtx.gif`;
+  import { name } from "$lib";
+  import { page } from "$app/stores";
 </script>
 
-<title>SalaniLeo's Weather - Temperatures</title>
+<head>
+  <title>{name + $page.url.pathname.replace("/", " - ")}</title>
+</head>
 
 <div id="root">
   <div>

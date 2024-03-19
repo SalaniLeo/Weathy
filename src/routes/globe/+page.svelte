@@ -2,9 +2,13 @@
   import Radar from "./radar.svelte";
   import Meteosat from "./meteosat.svelte";
   import Stuff from "./various.svelte";
+  import { name } from "$lib";
+  import { page } from "$app/stores";
 </script>
 
-<title>SalaniLeo's Weather - Globe</title>
+<head>
+  <title>{name + $page.url.pathname.replace("/", " - ")}</title>
+</head>
 
 <div id="root">
   <div id="top">
