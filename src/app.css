@@ -206,9 +206,12 @@ button {
 @media only screen and (max-width: 960px) {
   #conditionsIcon{
     position: relative;
-    top: 20px;
-    height: 100px;
-    width: 100px !important;
+    height: 32vw;
+    width: 32vw;
+    max-width: 200px;
+    max-height: 200px;
+    top: 50%;
+    transform: translateY(-50%);
   }
   .icon{
     margin-top: 7px;
