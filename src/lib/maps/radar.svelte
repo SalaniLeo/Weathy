@@ -7,10 +7,10 @@
   import { minuti } from "$lib/mapData";
 
   let imageSource;
-  let i = 0;
   let time;
-  let ora = new Date().getUTCHours() - new Date().getTimezoneOffset() / 60 - 4;
-  let oraTMP = new Date().getUTCHours() - offset / 60;
+  let i = 0;
+  let ora = new Date().getUTCHours() - 4;
+  let oraTMP = new Date().getUTCHours();
   let formattedTime;
 
   function generateQuery(type, region) {
@@ -21,17 +21,18 @@
       if (minutes[i] == "00") {
         ora = ora + 1;
       }
-      if (oraTMP == ora + 1 && parseInt(minutes[i]) + 17 > minuti) {
+      if (oraTMP == ora && parseInt(minutes[i]) + 15 > minuti) {
         ora = oraTMP - 4;
         i = 0;
       }
+
       let values = getUrl(type, region, i, ora);
       imageSource = values.url;
       time = values.time;
 
       let hours = time.substring(0, 2);
       let cut = time.substring(2, 4);
-      formattedTime = parseInt(hours) + 1 + ":" + cut;
+      formattedTime = parseInt(hours) + offset + ":" + cut;
 
       generateQuery("radarsatellite-europe", "italy");
       i = i + 1;

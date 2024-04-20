@@ -7,7 +7,7 @@ let minutes = [
 let mese = new Date().getUTCMonth() + 1;
 let giorno = new Date().getUTCDate();
 let anno = new Date().getFullYear();
-var offset = new Date().getTimezoneOffset();
+var offset = new Date().getTimezoneOffset() / 60;
 var minuti = new Date().getMinutes()
 
 if (mese < 10) {
@@ -16,6 +16,10 @@ if (mese < 10) {
 
 if (giorno < 10) {
     giorno = "0" + giorno;
+}
+
+if (offset<0) {
+    offset = 0+offset*-1
 }
 
 function format(num) {
