@@ -2,7 +2,7 @@ let base = "https://imn-api.meteoplaza.com/v4/nowcast/tiles/";
 let overlayItaly = "https://maptiler.infoplaza.io/api/maps/Border/static/11.69,41.27,5/1176x882.png?attribution=false";
 let overlayEurope = "https://maptiler.infoplaza.io/api/maps/Border/static/8.24,49.41,4.2/1560x1560.png?attribution=false";
 let minutes = [
-    "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "00",
+    "15", "30", "45", "00",
 ];
 let mese = new Date().getUTCMonth() + 1;
 let giorno = new Date().getUTCDate();

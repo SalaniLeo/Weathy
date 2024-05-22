@@ -39,17 +39,18 @@
   :global(#source) {
     width: 100%;
     position: relative;
-    height: 130%;
-    transform: translateY(-93%);
+    height: 129.5%;
+    transform: translateY(-93.5%);
     width: 108.75%;
     left: -6%;
   }
 
   :global(#sourceEurope) {
     position: relative;
-    height: 114.25%;
+    height: 113.5%;
     width: 113%;
     left: -1.5%;
+    transform: translateY(-94%);
   }
 
   :global(#overlay) {

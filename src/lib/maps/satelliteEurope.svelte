@@ -62,6 +62,6 @@
   </summary>
   <div class="map outline">
     <img src={overlayEurope} alt="overlay" id="overlay" class="mapSize" />
-    <img src={imageSource} alt="mapEurope" id="sourceEurope" />
+    <img src={imageSource} alt="map" id="sourceEurope" />
   </div>
 </details>
