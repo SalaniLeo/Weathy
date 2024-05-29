@@ -9,22 +9,28 @@ let giorno = new Date().getUTCDate();
 let anno = new Date().getFullYear();
 var offset = new Date().getTimezoneOffset() / 60;
 var minuti = new Date().getMinutes()
+export const hours = 4
+export const stepNum = 4 * minutes.length
 
 if (mese < 10) {
+    // @ts-ignore
     mese = "0" + mese;
 }
 
 if (giorno < 10) {
-    giorno = "0" + giorno;
+    // @ts-ignore
+    giorno = `0 ${giorno}`;
 }
 
 if (offset<0) {
     offset = 0+offset*-1
 }
 
+// @ts-ignore
 function format(num) {
     return num < 10 ? "0" + num.toString() : num.toString();
 }
+// @ts-ignore
 function getUrl(mapStyle, region, i, ora) {
   let time = format(ora) + "" + minutes[i]
     if(mapStyle == "radarsatellite-europe"){

@@ -13,6 +13,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
 	},
 	"devDependencies": {
+		"@bulatdashiev/svelte-slider": "^1.0.3",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/adapter-static": "^2.0.3",
 		"@sveltejs/kit": "^1.20.4",
@@ -24,7 +25,9 @@
 	"type": "module",
 	"dependencies": {
 		"@fortawesome/fontawesome-free": "^6.4.2",
+		"gif-js": "^2.1.0",
 		"js-cookie": "^3.0.5",
-		"svelte-json-tree": "^2.2.0"
+		"svelte-json-tree": "^2.2.0",
+		"svelte-slider": "^1.0.1"
 	}
 }

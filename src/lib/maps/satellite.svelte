@@ -1,67 +1,141 @@
-<script language="JavaScript">
-  import { getUrl } from "$lib/mapData";
-  import { overlayItaly } from "$lib/mapData";
-  import { refreshrate } from "$lib";
-  import { minutes } from "$lib/mapData";
-  import { offset } from "$lib/mapData";
-  import { minuti } from "$lib/mapData";
+<script lang="ts">
+  import { refreshrate, showOverlay } from "$lib";
+  import {
+    getUrl,
+    overlayItaly,
+    minutes,
+    offset,
+    stepNum,
+  } from "$lib/mapData.js";
 
-  let imageSource;
-  let time;
-  let i = 0;
   let ora = new Date().getUTCHours() - 4;
-  let oraTMP = new Date().getUTCHours();
-  let formattedTime;
 
-  function generateQuery(type, region) {
-    setTimeout(() => {
-      if (i >= minutes.length) {
-        i = 0;
-      }
-      if (minutes[i] == "00") {
+  let showmap = false;
+  let mapheight = ["657px", "60px"];
+
+  let playpause = true;
+
+  let value = "0";
+  let sourceIndex = 0;
+  let source: string;
+  let sourceTime: string;
+  let sources: any[] = [];
+  let timeoutId: ReturnType<typeof setTimeout>;
+
+  getUrls("satellite-europe", "italy");
+
+  function getUrls(type: string, region: string) {
+    for (let i = 0; i <= stepNum; i++) {
+      if (minutes[sourceIndex] == "00") {
         ora = ora + 1;
       }
-      if (oraTMP == ora && parseInt(minutes[i]) + 17 > minuti) {
-        ora = oraTMP - 4;
-        i = 0;
+      if (sourceIndex >= minutes.length) {
+        sourceIndex = sourceIndex - minutes.length;
       }
 
-      let values = getUrl(type, region, i, ora);
-      imageSource = values.url;
-      time = values.time;
+      let url = getUrl(type, region, sourceIndex, ora);
 
-      let hours = time.substring(0, 2);
-      let cut = time.substring(2);
-      formattedTime = parseInt(hours) + offset + ":" + cut;
-
-      generateQuery("satellite-europe", "italy");
-      i = i + 1;
-    }, refreshrate);
-  }
-
-  generateQuery("satellite-europe", "italy");
-
-  let isOpen = true;
-
-  function toggleSummary() {
-    if (isOpen == true) {
-      isOpen = "";
-    } else {
-      isOpen = true;
+      sources.push(url);
+      sourceIndex++;
     }
   }
+
+  function changeMap(event: any) {
+    try {
+      sourceIndex = event.target.value;
+      stopLoop();
+      playpause = false;
+    } catch {
+      sourceIndex = event;
+    }
+    source = sources[sourceIndex]["url"];
+    let time = sources[sourceIndex]["time"];
+    let hours = time.substring(0, 2);
+    let cut = time.substring(2, 4);
+    sourceTime = `${parseInt(hours) + offset}:${cut}`;
+  }
+
+  function hideorshow() {
+    showmap = !showmap;
+    playpause = !playpause;
+  }
+
+  function playorpause() {
+    playpause = !playpause;
+    if (playpause) {
+      startLoop();
+    } else {
+      stopLoop();
+    }
+  }
+
+  let y = 0;
+  const loopFunction = (): void => {
+    if (y >= sources.length) {
+      y = 0;
+    }
+    changeMap(y);
+    value = y.toString();
+    y++;
+    timeoutId = setTimeout(loopFunction, refreshrate);
+  };
+
+  const startLoop = (): void => {
+    setTimeout(loopFunction, refreshrate);
+  };
+
+  const stopLoop = (): void => {
+    clearTimeout(timeoutId);
+  };
+
+  startLoop();
 </script>
 
-<details class="container" open>
-  <summary
-    on:click={toggleSummary}
-    style="font-size: 25px;"
-    class:open={isOpen}
-  >
-    Satellite {isOpen && ` - ${formattedTime}`}
-  </summary>
-  <div class="map outline">
-    <img src={overlayItaly} id="overlay" alt="overlay" class="mapSize" />
-    <img src={imageSource} id="source" alt="map" />
+<div class="map outline" style="height: {mapheight[+showmap]};">
+  <div class="topMapContainer">
+    <div class="maptitle semibackground">Satellite</div>
+    <div class="showhide">
+      {#if showmap}
+        <button class="showhidebtn semibackground" on:click={hideorshow}
+          ><i class="fa-solid fa-chevron-down"></i></button
+        >
+      {:else}
+        <button class="showhidebtn semibackground" on:click={hideorshow}
+          ><i class="fa-solid fa-chevron-up"></i></button
+        >
+      {/if}
+    </div>
   </div>
-</details>
+  <div class="bottomMapContainer semibackground">
+    <div
+      class="maptime"
+      style="display: flex; align-items: center; transform: translateY(2px);"
+    >
+      {sourceTime}
+    </div>
+    <div id="playpausebtns">
+      {#if playpause}
+        <button class="playpausebtn" on:click={playorpause}
+          ><i class="fa-solid fa-pause"></i></button
+        >
+      {:else}
+        <button class="playpausebtn" on:click={playorpause}
+          ><i class="fa-solid fa-play"></i></button
+        >
+      {/if}
+    </div>
+    <div class="timebar" style="display: flex; align-items: center;">
+      <input
+        type="range"
+        min="0"
+        max={stepNum}
+        bind:value
+        on:change={changeMap}
+      />
+    </div>
+  </div>
+  {#if showOverlay}
+    <img src={overlayItaly} id="overlay" alt="overlay" class="mapSize" />
+  {/if}
+  <img src={source} id="source" alt="map" />
+</div>

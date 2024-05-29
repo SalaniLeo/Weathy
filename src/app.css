@@ -6,6 +6,8 @@
   --secondary-color: #242424;
   --tertiary-color: #4f4f4f;
 
+  --semi-opaque-color: #191919b3;
+
   /* Used for shadows, under ui elements */
    --shadow-color-heavy: #0a0a0aad;
    --shadow-color-medium: #00000080;
