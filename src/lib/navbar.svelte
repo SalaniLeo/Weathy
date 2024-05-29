@@ -41,7 +41,15 @@
         style="transform: translateY(-2px);"
         on:click={() => setTheme("light", true)}
       ></i>
-    {:else}
+    {:else if $currentTheme == "light"}
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <i
+        class="fa-regular fa-moon navElement"
+        style="transform: translateY(-2px);"
+        on:click={() => setTheme("biscuit", true)}
+      ></i>
+    {:else if $currentTheme == "biscuit"}
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <!-- svelte-ignore a11y-no-static-element-interactions -->
       <i
@@ -77,8 +85,11 @@
     align-items: center;
   }
 
-  .navElement {
+  .navElement,
+  nav i,
+  .spacer {
     font-size: 1.5rem;
+    color: var(--font-link-color) !important;
   }
 
   @media only screen and (max-width: 1390px) {
