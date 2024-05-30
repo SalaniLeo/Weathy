@@ -103,7 +103,7 @@
     margin: 20px;
     height: 40px;
     width: 40px;
-    z-index: 2;
+    z-index: 3;
   }
   .textInput {
     border-radius: var(--border-radius-medium);

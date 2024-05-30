@@ -5,7 +5,6 @@
   --primary-color: #191919;
   --secondary-color: #242424;
   --tertiary-color: #4f4f4f;
-
   --semi-opaque-color: #191919b3;
 
   /* Used for shadows, under ui elements */
@@ -37,6 +36,7 @@
   --primary-color: #e5e2df;
   --secondary-color: #fefefe;
   --tertiary-color: #565656;
+  --semi-opaque-color: #ffffffb3;
 
   /* Used for shadows, under ui elements */
   --shadow-color-heavy: #0a0a0ace;
@@ -68,6 +68,7 @@
 }
 
 body {
+  overflow-x: hidden;
   margin: 0px;
   background-color: var(--primary-color);
 }
@@ -217,8 +218,8 @@ button {
   }
   .icon{
     margin-top: 7px;
-    margin-left: 10px;
     margin-right: 10px;
   }
+
 }
 
