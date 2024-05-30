@@ -10,7 +10,7 @@ let anno = new Date().getFullYear();
 var offset = new Date().getTimezoneOffset() / 60;
 var minuti = new Date().getMinutes()
 export const hours = 4
-export const stepNum = 4 * minutes.length
+export const stepNum = 4 * minutes.length + 1
 
 if (mese < 10) {
     // @ts-ignore

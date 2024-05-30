@@ -4,7 +4,7 @@
   import Radar from "./radar.svelte";
 </script>
 
-<div class="root">
+<div class="maps">
   <div class="content">
     <Satellite />
     <Radar />
@@ -13,15 +13,18 @@
 </div>
 
 <style>
+  .maps {
+    max-width: 100vw;
+    height: min-content;
+    overflow-y: hidden;
+    overflow-x: scroll;
+  }
   .content {
     display: flex;
     flex-direction: column;
     gap: 20px;
-  }
-
-  :global(.mapSize) {
-    height: 657px;
-    width: 885px;
+    margin: 0.5rem;
+    margin-bottom: 5rem;
   }
 
   :global(.map) {
@@ -130,7 +133,6 @@
     box-shadow: none;
     font-size: 20px;
     transform: translateY(2px);
-    width: 25px;
-    padding: 5px;
+    margin: 0.25rem;
   }
 </style>

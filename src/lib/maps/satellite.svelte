@@ -9,58 +9,62 @@
   } from "$lib/mapData.js";
 
   let ora = new Date().getUTCHours() - 4;
-
-  let showmap = false;
-  let mapheight = ["657px", "60px"];
-
+  let showmap = true;
+  const mapheight = ["657px", "60px"];
   let playpause = true;
-
   let value = "0";
   let sourceIndex = 0;
-  let source: string;
-  let sourceTime: string;
-  let sources: any[] = [];
-  let timeoutId: ReturnType<typeof setTimeout>;
+  let source: string = "";
+  let sourceTime: string = "";
+  let sources: Array<{ url: string; time: string }> = [];
+  let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
   getUrls("satellite-europe", "italy");
 
-  function getUrls(type: string, region: string) {
+  function getUrls(type: string, region: string): void {
     for (let i = 0; i <= stepNum; i++) {
-      if (minutes[sourceIndex] == "00") {
-        ora = ora + 1;
+      if (minutes[sourceIndex] === "00") {
+        ora++;
       }
       if (sourceIndex >= minutes.length) {
-        sourceIndex = sourceIndex - minutes.length;
+        sourceIndex -= minutes.length;
       }
 
-      let url = getUrl(type, region, sourceIndex, ora);
-
-      sources.push(url);
+      const url = getUrl(type, region, sourceIndex, ora);
+      sources.push({ url: url["url"], time: `${ora}${minutes[sourceIndex]}` });
       sourceIndex++;
     }
   }
 
-  function changeMap(event: any) {
-    try {
-      sourceIndex = event.target.value;
+  function changeMap(event: any): void {
+    if (showmap) {
+      try {
+        sourceIndex =
+          typeof event === "number" ? event : parseInt(event.target.value, 10);
+      } catch {
+        sourceIndex = event;
+      }
+
       stopLoop();
-      playpause = false;
-    } catch {
-      sourceIndex = event;
+      const { url, time } = sources[sourceIndex];
+      source = url;
+      const hours = time.substring(0, 2);
+      const minutes = time.substring(2, 4);
+      sourceTime = `${parseInt(hours, 10) + offset}:${minutes}`;
     }
-    source = sources[sourceIndex]["url"];
-    let time = sources[sourceIndex]["time"];
-    let hours = time.substring(0, 2);
-    let cut = time.substring(2, 4);
-    sourceTime = `${parseInt(hours) + offset}:${cut}`;
   }
 
-  function hideorshow() {
+  function hideOrShow(): void {
     showmap = !showmap;
-    playpause = !playpause;
+    playpause = showmap;
+    if (showmap) {
+      startLoop();
+    } else {
+      stopLoop();
+    }
   }
 
-  function playorpause() {
+  function playOrPause(): void {
     playpause = !playpause;
     if (playpause) {
       startLoop();
@@ -70,38 +74,44 @@
   }
 
   let y = 0;
+
   const loopFunction = (): void => {
-    if (y >= sources.length) {
-      y = 0;
+    if (showmap) {
+      if (y >= sources.length) {
+        y = 0;
+      }
+      changeMap(y);
+      value = y.toString();
+      y++;
+      timeoutId = setTimeout(loopFunction, refreshrate);
     }
-    changeMap(y);
-    value = y.toString();
-    y++;
-    timeoutId = setTimeout(loopFunction, refreshrate);
   };
 
   const startLoop = (): void => {
-    setTimeout(loopFunction, refreshrate);
+    stopLoop();
+    timeoutId = setTimeout(loopFunction, refreshrate);
   };
 
   const stopLoop = (): void => {
-    clearTimeout(timeoutId);
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
   };
 
   startLoop();
 </script>
 
-<div class="map outline" style="height: {mapheight[+showmap]};">
+<div class="map outline" style="height: {mapheight[+!showmap]};">
   <div class="topMapContainer">
     <div class="maptitle semibackground">Satellite</div>
     <div class="showhide">
       {#if showmap}
-        <button class="showhidebtn semibackground" on:click={hideorshow}
-          ><i class="fa-solid fa-chevron-down"></i></button
+        <button class="showhidebtn semibackground" on:click={hideOrShow}
+          ><i class="fa-solid fa-chevron-up"></i></button
         >
       {:else}
-        <button class="showhidebtn semibackground" on:click={hideorshow}
-          ><i class="fa-solid fa-chevron-up"></i></button
+        <button class="showhidebtn semibackground" on:click={hideOrShow}
+          ><i class="fa-solid fa-chevron-down"></i></button
         >
       {/if}
     </div>
@@ -115,11 +125,11 @@
     </div>
     <div id="playpausebtns">
       {#if playpause}
-        <button class="playpausebtn" on:click={playorpause}
+        <button class="playpausebtn" on:click={playOrPause}
           ><i class="fa-solid fa-pause"></i></button
         >
       {:else}
-        <button class="playpausebtn" on:click={playorpause}
+        <button class="playpausebtn" on:click={playOrPause}
           ><i class="fa-solid fa-play"></i></button
         >
       {/if}

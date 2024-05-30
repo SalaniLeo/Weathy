@@ -15,8 +15,7 @@
     <div class="row">
       <Radar />
     </div>
-    <!-- <p class="spacer1" />
-    <div class="row">
+    <!-- <div class="row">
       <Meteosat />
     </div> -->
     <div class="row">
