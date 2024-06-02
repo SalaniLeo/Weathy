@@ -22,9 +22,12 @@
   getUrls("satellite-europe", "europe");
 
   function getUrls(type: string, region: string): void {
-    for (let i = 0; i <= stepNum - 3; i++) {
+    for (let i = 0; i <= stepNum; i++) {
       if (minutes[sourceIndex] === "00") {
         ora++;
+      }
+      if (ora < 10 && ora.toString()[0] != "0") {
+        ora = `0${ora}`;
       }
       if (sourceIndex >= minutes.length) {
         sourceIndex -= minutes.length;

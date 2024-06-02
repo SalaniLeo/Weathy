@@ -20,11 +20,14 @@
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
   getUrls("radarsatellite-europe", "italy");
-
+  console.log(stepNum);
   function getUrls(type: string, region: string): void {
     for (let i = 0; i <= stepNum - 3; i++) {
       if (minutes[sourceIndex] === "00") {
         ora++;
+      }
+      if (ora < 10 && ora.toString()[0] != "0") {
+        ora = `0${ora}`;
       }
       if (sourceIndex >= minutes.length) {
         sourceIndex -= minutes.length;

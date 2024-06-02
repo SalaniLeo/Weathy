@@ -10,7 +10,20 @@ let anno = new Date().getFullYear();
 var offset = new Date().getTimezoneOffset() / 60;
 var minuti = new Date().getMinutes()
 export const hours = 4
-export const stepNum = 4 * minutes.length + 1
+export let stepNum = 4 * minutes.length
+
+const now = new Date();
+const currentMinute = now.getMinutes();
+
+if        (currentMinute-15>parseInt(minutes[0]) && currentMinute-15<parseInt(minutes[1])) {
+    stepNum = stepNum;
+} else if (currentMinute-15>parseInt(minutes[1]) && currentMinute-15<parseInt(minutes[2])) {
+    stepNum = stepNum-1;
+} else if (currentMinute-15>parseInt(minutes[2]) && currentMinute-15<parseInt(minutes[3])) {
+    stepNum = stepNum-2;
+} else if (currentMinute-15>parseInt(minutes[3]) && currentMinute-15<parseInt(minutes[0])) {
+    stepNum = stepNum-3;
+}
 
 if (mese < 10) {
     // @ts-ignore
@@ -19,7 +32,7 @@ if (mese < 10) {
 
 if (giorno < 10) {
     // @ts-ignore
-    giorno = `0 ${giorno}`;
+    giorno = `0${giorno}`;
 }
 
 if (offset<0) {
@@ -27,14 +40,10 @@ if (offset<0) {
 }
 
 // @ts-ignore
-function format(num) {
-    return num < 10 ? "0" + num.toString() : num.toString();
-}
-// @ts-ignore
 function getUrl(mapStyle, region, i, ora) {
-  let time = format(ora) + "" + minutes[i]
+  let time = ora + "" + minutes[i]
     if(mapStyle == "radarsatellite-europe"){
-      time = format(ora) + "" + minutes[i] + "00";
+      time = ora + "" + minutes[i] + "00";
     }
 
     let zone = "";
