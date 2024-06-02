@@ -14,6 +14,7 @@
   let playpause = true;
   let value = "0";
   let sourceIndex = 0;
+  let y = sourceIndex;
   let source: string = "";
   let sourceTime: string = "";
   let sources: Array<{ url: string; time: string }> = [];
@@ -26,10 +27,12 @@
       if (minutes[sourceIndex] === "00") {
         ora++;
       }
+      if (ora < 10 && ora.toString()[0] != "0") {
+        ora = `0${ora}`;
+      }
       if (sourceIndex >= minutes.length) {
         sourceIndex -= minutes.length;
       }
-
       const url = getUrl(type, region, sourceIndex, ora);
       sources.push({ url: url["url"], time: `${ora}${minutes[sourceIndex]}` });
       sourceIndex++;
@@ -72,8 +75,6 @@
       stopLoop();
     }
   }
-
-  let y = 0;
 
   const loopFunction = (): void => {
     if (showmap) {
