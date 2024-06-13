@@ -41,13 +41,14 @@
 
   function changeMap(event: any): void {
     if (showmap) {
+      sourceIndex =
+        typeof event === "number" ? event : parseInt(event.target.value, 10);
       try {
-        sourceIndex =
-          typeof event === "number" ? event : parseInt(event.target.value, 10);
+        event.target.value;
+        playpause = false;
       } catch {
-        sourceIndex = event;
+        event;
       }
-
       stopLoop();
       const { url, time } = sources[sourceIndex];
       source = url;
