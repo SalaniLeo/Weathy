@@ -35,27 +35,19 @@
     <div class="spacer">|</div>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <!-- svelte-ignore a11y-no-static-element-interactions -->
-    {#if $currentTheme == "dark"}
+    {#if $currentTheme == "light"}
       <i
         class="fa-regular fa-sun navElement"
         style="transform: translateY(-2px);"
-        on:click={() => setTheme("light", true)}
-      ></i>
-    {:else if $currentTheme == "light"}
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <!-- svelte-ignore a11y-no-static-element-interactions -->
-      <i
-        class="fa-regular fa-moon navElement"
-        style="transform: translateY(-2px);"
-        on:click={() => setTheme("biscuit", true)}
-      ></i>
-    {:else if $currentTheme == "biscuit"}
-      <!-- svelte-ignore a11y-click-events-have-key-events -->
-      <!-- svelte-ignore a11y-no-static-element-interactions -->
-      <i
-        class="fa-regular fa-moon navElement"
-        style="transform: translateY(-2px);"
         on:click={() => setTheme("dark", true)}
+      ></i>
+    {:else}
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <!-- svelte-ignore a11y-no-static-element-interactions -->
+      <i
+        class="fa-regular fa-moon navElement"
+        style="transform: translateY(-2px);"
+        on:click={() => setTheme("light", true)}
       ></i>
     {/if}
   </div>
@@ -63,8 +55,6 @@
 
 <style>
   nav {
-    position: fixed;
-    bottom: 0px;
     box-shadow: var(--shadow-color-medium) 0px 0px 10px;
     justify-content: center;
     align-items: center;
@@ -76,6 +66,8 @@
     background-color: var(--accent-color-primary) !important;
     z-index: 2;
     transition-duration: 0s;
+    position: fixed;
+    bottom: 0px;
   }
 
   nav > div {

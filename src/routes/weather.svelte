@@ -78,8 +78,6 @@
       minutes = `0${minutes}`;
     }
 
-    console.log(`${hours}:${minutes} ${ampm}`);
-
     return `${hours}:${minutes} ${ampm}`;
   }
 </script>
@@ -113,3 +111,12 @@
     </details>
   </div>
 </div>
+
+<style>
+  #weather {
+    display: flex;
+  }
+  #location {
+    text-wrap: pretty;
+  }
+</style>
