@@ -20,7 +20,6 @@
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
   getUrls("radarsatellite-europe", "italy");
-  console.log(stepNum);
   function getUrls(type: string, region: string): void {
     for (let i = 0; i <= stepNum - 3; i++) {
       if (minutes[sourceIndex] === "00") {
@@ -41,13 +40,14 @@
 
   function changeMap(event: any): void {
     if (showmap) {
+      sourceIndex =
+        typeof event === "number" ? event : parseInt(event.target.value, 10);
       try {
-        sourceIndex =
-          typeof event === "number" ? event : parseInt(event.target.value, 10);
+        event.target.value;
+        playpause = false;
       } catch {
-        sourceIndex = event;
+        event;
       }
-
       stopLoop();
       const { url, time } = sources[sourceIndex];
       source = url;
@@ -131,7 +131,7 @@
         <button class="playpausebtn" on:click={playOrPause}
           ><i class="fa-solid fa-pause"></i></button
         >
-      {:else}
+      {:else if playpause == false}
         <button class="playpausebtn" on:click={playOrPause}
           ><i class="fa-solid fa-play"></i></button
         >

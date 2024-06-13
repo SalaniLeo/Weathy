@@ -26,7 +26,6 @@ export function setTheme(theme, save) {
 }
 
 export function getTheme() {
-  console.log(getCookie('theme'))
   return getCookie('theme');
 }
 
