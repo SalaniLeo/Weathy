@@ -10,7 +10,7 @@
 
   let ora = new Date().getUTCHours() - 4;
   let showmap = false;
-  const mapheight = ["657px", "60px"];
+  const mapheight = ["fit-content", "60px"];
   let playpause = true;
   let value = "0";
   let sourceIndex = 0;

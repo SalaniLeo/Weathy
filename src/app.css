@@ -211,7 +211,6 @@ button {
     max-height: 200px;
   }
   #weather {
-    display: flex;
     width: 90vw;
   }
 }

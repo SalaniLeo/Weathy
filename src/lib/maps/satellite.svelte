@@ -10,7 +10,7 @@
 
   let ora = new Date().getUTCHours() - 4;
   let showmap = true;
-  const mapheight = ["657px", "60px"];
+  const mapheight = ["fit-content", "60px"];
   let playpause = true;
   let value = "0";
   let sourceIndex = 0;
@@ -52,8 +52,12 @@
       stopLoop();
       const { url, time } = sources[sourceIndex];
       source = url;
-      const hours = time.substring(0, 2);
+      let hours = time.substring(0, 2);
       const minutes = time.substring(2, 4);
+      console.log(hours);
+      if (parseInt(hours) + offset >= 24) {
+        hours = String(parseInt(hours) - 24);
+      }
       sourceTime = `${parseInt(hours, 10) + offset}:${minutes}`;
     }
   }
