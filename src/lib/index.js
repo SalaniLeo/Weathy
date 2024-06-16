@@ -45,7 +45,7 @@ function fetchApi() {
 		for (var i in response.list) {
 			let time = response.list[i]['dt_txt'].slice(11, 13);
 			let temperature = Math.round(response.list[i]['main']['temp'] * 10) / 10;
-			console.log(response.list[i]['dt'], getWeekDays(response.list[i]['dt']), time)
+
 			if (minTemp > temperature) {
 				minTemp = temperature;
 			}
@@ -55,7 +55,6 @@ function fetchApi() {
 
 			if (time == 21) {
 				let date = response.list[counter]['dt'];
-				console.log(counter)
 
 				if (counter - 3 <= 0 ) {
 					days.push({ name: `${getWeekDays(date)}`, icon: `${mapWeatherIconToName(response.list[0]['weather'][0]['icon'])}`, minTemp: `${minTemp}`, maxTemp: `${maxTemp}` });
@@ -68,7 +67,6 @@ function fetchApi() {
 			}
 			counter = counter + 1;
 		}
-		console.log(days)
 		return days;
 	}));
 });

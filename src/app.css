@@ -97,7 +97,7 @@ button {
 
 /* Every container, with a shadow and border radius */
 .container{
-  padding: 10px;
+  padding: 7.5px;
   border-radius: var(--border-radius-heavy);
   width: fit-content;
   background-color: var(--secondary-color);
