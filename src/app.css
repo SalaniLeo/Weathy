@@ -35,7 +35,7 @@
   /* Used for ui elements background. Use appropriate proportions for each one */
   --primary-color: #e5e2df;
   --secondary-color: #fefefe;
-  --tertiary-color: #565656;
+  --tertiary-color: #e9e9e9;
   --semi-opaque-color: #ffffff7e;
 
   /* Used for shadows, under ui elements */
@@ -368,6 +368,9 @@ input[type="range"] {
     margin: 0px;
     margin: 0.5rem 0.25rem;
     margin-bottom: 3rem;
+  }
+  .semibackground {
+    background-color: var(--tertiary-color);
   }
   .map {
     width: auto;
