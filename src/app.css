@@ -35,8 +35,8 @@
   /* Used for ui elements background. Use appropriate proportions for each one */
   --primary-color: #e5e2df;
   --secondary-color: #fefefe;
-  --tertiary-color: #565656;
-  --semi-opaque-color: #caeae8c8;
+  --tertiary-color: #e9e9e9;
+  --semi-opaque-color: #ffffff7e;
 
   /* Used for shadows, under ui elements */
   --shadow-color-heavy: #0a0a0ace;
@@ -271,6 +271,7 @@ button {
 
 .semibackground {
   background-color: var(--semi-opaque-color);
+  backdrop-filter: blur(2px);
   z-index: 2;
   margin: 10px;
   padding: 7.5px;
@@ -368,6 +369,9 @@ input[type="range"] {
     margin: 0.5rem 0.25rem;
     margin-bottom: 3rem;
   }
+  .semibackground {
+    background-color: var(--tertiary-color);
+  }
   .map {
     width: auto;
     margin: 0px;
@@ -390,7 +394,7 @@ input[type="range"] {
     border-radius: var(--border-radius-medium);
     position: relative;
     transform: unset;
-    height: 400px;
+    height: 350px;
     width: 100%;
     left: 0px;
   }
