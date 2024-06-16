@@ -54,7 +54,6 @@
       source = url;
       let hours = time.substring(0, 2);
       const minutes = time.substring(2, 4);
-      console.log(hours);
       if (parseInt(hours) + offset >= 24) {
         hours = String(parseInt(hours) - 24);
       }
