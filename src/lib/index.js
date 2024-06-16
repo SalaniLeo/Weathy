@@ -36,41 +36,44 @@ function fetchApi() {
         .then((responseJson)=>{
 
 		let response = responseJson
-
-		let minTemp = response.list[0]['main']['temp']
-		let maxTemp = response.list[0]['main']['temp']
+		
+		let minTemp = response.list[0]['main']['temp'];
+		let maxTemp = response.list[0]['main']['temp'];
 		let days = [];
 		let counter = 0;
 
-		for(var i in response.list){
-			let time = response.list[i]['dt_txt'].slice(11, 13)
-			let temperature = Math.round(response.list[i]['main']['temp']*10) / 10
-			let icon = "";
-
-			if(minTemp > temperature){
-				minTemp = temperature
-			} else if (maxTemp < temperature) {
-				maxTemp
+		for (var i in response.list) {
+			let time = response.list[i]['dt_txt'].slice(11, 13);
+			let temperature = Math.round(response.list[i]['main']['temp'] * 10) / 10;
+			console.log(response.list[i]['dt'], getWeekDays(response.list[i]['dt']), time)
+			if (minTemp > temperature) {
+				minTemp = temperature;
+			}
+			if (maxTemp < temperature) {
+				maxTemp = temperature;
 			}
 
-			if(time == 0){
+			if (time == 21) {
 				let date = response.list[counter]['dt'];
+				console.log(counter)
 
-				if(counter-3 < 0){
-					days.push({ name: `${getWeekDays(date)}`, icon: `${mapWeatherIconToName(response.list[0]['weather'][0]['icon'])}`, minTemp: `${minTemp}`, maxTemp: `${maxTemp}`})
+				if (counter - 3 <= 0 ) {
+					days.push({ name: `${getWeekDays(date)}`, icon: `${mapWeatherIconToName(response.list[0]['weather'][0]['icon'])}`, minTemp: `${minTemp}`, maxTemp: `${maxTemp}` });
 				} else {
-				days.push({ name: `${getWeekDays(date)}`, icon: `${mapWeatherIconToName(response.list[counter-3]['weather'][0]['icon'])}`, minTemp: `${minTemp}`, maxTemp: `${maxTemp}`})
+					days.push({ name: `${getWeekDays(date)}`, icon: `${mapWeatherIconToName(response.list[counter - 3]['weather'][0]['icon'])}`, minTemp: `${minTemp}`, maxTemp: `${maxTemp}` });
 				}
 
-				minTemp = temperature
-				maxTemp = temperature
+				minTemp = temperature;
+				maxTemp = temperature;
 			}
-			counter = counter + 1
+			counter = counter + 1;
 		}
-		return days
+		console.log(days)
+		return days;
 	}));
-	});
-  }
+});
+}
+
 
   let weather = fetchApi();
 
