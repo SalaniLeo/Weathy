@@ -116,6 +116,7 @@
   #weather {
     display: flex;
     min-width: 300px;
+    padding: 7.5px;
   }
   #location {
     text-wrap: pretty;
