@@ -3,6 +3,7 @@ let overlayItaly = "https://maptiler.infoplaza.io/api/maps/Border/static/11.69,4
 let overlayEurope = "https://maptiler.infoplaza.io/api/maps/Border/static/8.24,49.41,4.2/1560x1560.png?attribution=false";
 let mese = new Date().getUTCMonth() + 1;
 let giorno = new Date().getUTCDate();
+let ieri = giorno - 1
 let anno = new Date().getFullYear();
 var offset = new Date().getTimezoneOffset() / 60;
 var minuti = new Date().getMinutes()
@@ -55,6 +56,18 @@ function getUrl(mapStyle, region, i, ora) {
         zone = "/7/43/63/52/73";
     } else if (region == "europe") {
         zone = "/5/8/14/14/20";
+    }
+    console.log(time.substring(0, 2), giorno, ieri)
+    if (parseInt(time.substring(0, 2)) >= 20 && parseInt(time.substring(0, 2)) < 24) {
+        if (giorno - 1 == ieri) {
+            giorno = giorno - 1
+        }
+    } else if (parseInt(time.substring(0, 2)) >= 24) {
+        if (giorno = ieri ){
+            giorno = giorno + 1
+        }
+        time = `0${(time.substring(0, 2)-24)*-1}${time.substring(2)}`
+        console.log(time)
     }
 
     let url =

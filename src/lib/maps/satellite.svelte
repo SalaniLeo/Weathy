@@ -24,6 +24,9 @@
 
   function getUrls(type: string, region: string): void {
     for (let i = 0; i <= stepNum; i++) {
+      if (ora < 0) {
+        ora = 24 + ora;
+      }
       if (minutes[sourceIndex] === "00") {
         ora++;
       }
