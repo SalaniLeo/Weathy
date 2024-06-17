@@ -14,6 +14,7 @@
   let playpause = true;
   let value = "0";
   let sourceIndex = 0;
+  let y = sourceIndex;
   let source: string = "";
   let sourceTime: string = "";
   let sources: Array<{ url: string; time: string }> = [];
@@ -23,6 +24,9 @@
 
   function getUrls(type: string, region: string): void {
     for (let i = 0; i <= stepNum; i++) {
+      if (ora < 0) {
+        ora = 24 + ora;
+      }
       if (minutes[sourceIndex] === "00") {
         ora++;
       }
@@ -32,7 +36,6 @@
       if (sourceIndex >= minutes.length) {
         sourceIndex -= minutes.length;
       }
-
       const url = getUrl(type, region, sourceIndex, ora);
       sources.push({ url: url["url"], time: `${ora}${minutes[sourceIndex]}` });
       sourceIndex++;
@@ -52,8 +55,11 @@
       stopLoop();
       const { url, time } = sources[sourceIndex];
       source = url;
-      const hours = time.substring(0, 2);
+      let hours = time.substring(0, 2);
       const minutes = time.substring(2, 4);
+      if (parseInt(hours) + offset >= 24) {
+        hours = String(parseInt(hours) - 24);
+      }
       sourceTime = `${parseInt(hours, 10) + offset}:${minutes}`;
     }
   }
@@ -76,8 +82,6 @@
       stopLoop();
     }
   }
-
-  let y = 0;
 
   const loopFunction = (): void => {
     if (showmap) {
