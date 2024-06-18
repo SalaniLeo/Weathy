@@ -37,6 +37,7 @@
         sourceIndex -= minutes.length;
       }
       const url = getUrl(type, region, sourceIndex, ora);
+
       sources.push({ url: url["url"], time: `${ora}${minutes[sourceIndex]}` });
       sourceIndex++;
     }

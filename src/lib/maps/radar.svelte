@@ -145,7 +145,7 @@
       <input
         type="range"
         min="0"
-        max={stepNum}
+        max={stepNum - 3}
         bind:value
         on:change={changeMap}
       />

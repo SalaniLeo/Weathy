@@ -59,15 +59,14 @@ function getUrl(mapStyle, region, i, ora) {
     }
     console.log(time.substring(0, 2), giorno, ieri)
     if (parseInt(time.substring(0, 2)) >= 20 && parseInt(time.substring(0, 2)) < 24) {
-        if (giorno - 1 == ieri) {
-            giorno = giorno - 1
-        }
+        // if (giorno - 1 == ieri) {
+        //     giorno = giorno - 1
+        // }
     } else if (parseInt(time.substring(0, 2)) >= 24) {
         if (giorno = ieri ){
             giorno = giorno + 1
         }
         time = `0${(time.substring(0, 2)-24)*-1}${time.substring(2)}`
-        console.log(time)
     }
 
     let url =
