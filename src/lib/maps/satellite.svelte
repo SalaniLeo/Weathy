@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { refreshrate, showOverlay } from "$lib";
+  import { refreshrate, showOverlay, isPreviousMapLoaded } from "$lib";
   import {
     getUrl,
     overlayItaly,
@@ -19,6 +19,8 @@
   let sourceTime: string = "";
   let sources: Array<{ url: string; time: string }> = [];
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+  import Image from "../Image.svelte";
 
   getUrls("satellite-europe", "italy");
 
@@ -44,7 +46,7 @@
   }
 
   function changeMap(event: any): void {
-    if (showmap) {
+    if (showmap && $isPreviousMapLoaded) {
       sourceIndex =
         typeof event === "number" ? event : parseInt(event.target.value, 10);
       try {
@@ -85,7 +87,7 @@
   }
 
   const loopFunction = (): void => {
-    if (showmap) {
+    if (showmap & $isPreviousMapLoaded) {
       if (y >= sources.length) {
         y = 0;
       }
@@ -156,5 +158,7 @@
   {#if showOverlay}
     <img src={overlayItaly} id="overlay" alt="overlay" class="mapSize" />
   {/if}
-  <img src={source} id="source" alt="map" />
+  {#if source}
+    <Image src={source} />
+  {/if}
 </div>

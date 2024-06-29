@@ -20,6 +20,38 @@
       </div>
 
       <div class="mapWidgetContainer">
+        <p>Daily precipitations NOAA</p>
+        <!-- svelte-ignore a11y-invalid-attribute -->
+        <a
+          href="javascript:window.open('https://www.cpc.ncep.noaa.gov/products/JAWF_Monitoring/Europe/daily/p.1day.figa.gif
+          ','','scrollbars=no,width=1265,height=955');void('');"
+        >
+          <img
+            class="mapWidget"
+            src="https://www.cpc.ncep.noaa.gov/products/JAWF_Monitoring/Europe/daily/p.1day.figa.gif
+            "
+            alt="ingrandisci"
+          />
+        </a>
+      </div>
+
+      <div class="mapWidgetContainer">
+        <p>15 Day precipitations NOAA</p>
+        <!-- svelte-ignore a11y-invalid-attribute -->
+        <a
+          href="javascript:window.open('https://www.cpc.ncep.noaa.gov/products/JAWF_Monitoring/Europe/daily/p.15day.figa.gif
+          ','','scrollbars=no,width=1265,height=955');void('');"
+        >
+          <img
+            class="mapWidget"
+            src="https://www.cpc.ncep.noaa.gov/products/JAWF_Monitoring/Europe/daily/p.15day.figa.gif
+            "
+            alt="ingrandisci"
+          />
+        </a>
+      </div>
+
+      <div class="mapWidgetContainer">
         <p>Radar USA weather.gov</p>
         <!-- svelte-ignore a11y-invalid-attribute -->
         <a

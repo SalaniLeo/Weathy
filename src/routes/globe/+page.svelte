@@ -4,6 +4,12 @@
   import Stuff from "./various.svelte";
   import { name } from "$lib";
   import { page } from "$app/stores";
+  import { onMount } from "svelte";
+
+  onMount( () => {
+    
+  })
+
 </script>
 
 <head>

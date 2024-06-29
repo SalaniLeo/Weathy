@@ -1,5 +1,10 @@
 <script>
-  import { weather, tmp_units } from "../lib/index";
+  import {
+    weather,
+    tmp_units,
+    getWeekDays,
+    mapWeatherIconToName,
+  } from "../lib/index";
   import { base } from "$app/paths";
 </script>
 
@@ -9,12 +14,15 @@
     {#await weather}
       Loading...
     {:then content}
-      {#each content as { name, icon, maxTemp, minTemp }, i}
+      {#each content as { clouds, dew_point, dt, feels_like, humidity, moon_phase, moonrise, moonset, pop, pressure, rain, summary, sunrise, sunset, temp, uvi, weather, wind_deg, wind_gust, wind_speed }, i}
         <div class="day">
-          <p class="name">{name}</p>
-          <img alt="icon" src={base + "/icons/" + icon} />
-          <p class="max">{maxTemp}{tmp_units}</p>
-          <p class="min">{minTemp}{tmp_units}</p>
+          <p class="name">{getWeekDays(dt)}</p>
+          <img
+            alt="icon"
+            src={base + "/icons/" + mapWeatherIconToName(weather[0]["id"])}
+          />
+          <p class="max">{temp.max}{tmp_units}</p>
+          <p class="min">{temp.min}{tmp_units}</p>
         </div>
       {/each}
     {/await}

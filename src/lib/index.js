@@ -2,6 +2,7 @@
 import Cookies from 'js-cookie'
 import { writable } from 'svelte/store';
 export const currentTheme = writable("light");
+export const isPreviousMapLoaded = writable(true)
 
 export let location = (Cookies.get('location')!=undefined) ? Cookies.get('location') : "Ferrara";
 export let tmp_units = "°C";
@@ -29,53 +30,50 @@ export function getTheme() {
   return getCookie('theme');
 }
 
-function fetchApi() {
-	return new Promise((resolve) => {
-		resolve(fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid=72d251b81d30ef572ae667dfe6c4ee1a`)
-        .then((response)=>response.json())
-        .then((responseJson)=>{
+function getUserLocation() {
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                resolve({
+                    lat: position.coords.latitude,
+                    lon: position.coords.longitude
+                });
+            },
+            (error) => {
+                reject(error);
+            }
+        );
+    });
+}
 
-		let response = responseJson
-		
-		let minTemp = response.list[0]['main']['temp'];
-		let maxTemp = response.list[0]['main']['temp'];
-		let days = [];
-		let counter = 0;
+async function fetchApi() {
+	let days = []
+	try {
+        const { lat, lon } = await getUserLocation();
 
-		for (var i in response.list) {
-			let time = response.list[i]['dt_txt'].slice(11, 13);
-			let temperature = Math.round(response.list[i]['main']['temp'] * 10) / 10;
+		return new Promise((resolve) => {
+			resolve(fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&appid=72d251b81d30ef572ae667dfe6c4ee1a`)
+			.then((response)=>response.json())
+			.then((responseJson)=>{
 
-			if (minTemp > temperature) {
-				minTemp = temperature;
+			let response = responseJson.daily
+
+			for (let n in response) {
+				let day = responseJson.daily[n]
+				days.push(day)
 			}
-			if (maxTemp < temperature) {
-				maxTemp = temperature;
-			}
-
-			if (time == 21) {
-				let date = response.list[counter]['dt'];
-
-				if (counter - 3 <= 0 ) {
-					days.push({ name: `${getWeekDays(date)}`, icon: `${mapWeatherIconToName(response.list[0]['weather'][0]['icon'])}`, minTemp: `${minTemp}`, maxTemp: `${maxTemp}` });
-				} else {
-					days.push({ name: `${getWeekDays(date)}`, icon: `${mapWeatherIconToName(response.list[counter - 3]['weather'][0]['icon'])}`, minTemp: `${minTemp}`, maxTemp: `${maxTemp}` });
-				}
-
-				minTemp = temperature;
-				maxTemp = temperature;
-			}
-			counter = counter + 1;
-		}
-		return days;
-	}));
-});
+			return days;
+		}));
+	});
+	} catch (error) {
+		console.error("Error getting location", error);
+	}
 }
 
 
   let weather = fetchApi();
 
-  function getWeekDays(unix_timestamp)
+  export function getWeekDays(unix_timestamp)
   {
 	var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 	var d = new Date(unix_timestamp * 1000);
@@ -84,7 +82,7 @@ function fetchApi() {
 	return dayName
   }
 
-  function mapWeatherIconToName(icon) {
+  export function mapWeatherIconToName(icon) {
     const iconToName = {
       "01d": "weather-clear.svg",
       "01n": "weather-clear-night.svg",
@@ -125,4 +123,4 @@ function setShowOverlay(value){
 }
 
 export const name = 'Weathy'
-export { weather, mapWeatherIconToName, setRefreshRate, setLocation, setShowOverlay }
+export { weather, setRefreshRate, setLocation, setShowOverlay }

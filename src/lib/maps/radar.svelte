@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { refreshrate, showOverlay } from "$lib";
+  import { refreshrate, showOverlay, isPreviousMapLoaded } from "$lib";
   import {
     getUrl,
     overlayItaly,
@@ -11,7 +11,7 @@
   let ora = new Date().getUTCHours() - 4;
   let showmap = false;
   const mapheight = ["fit-content", "60px"];
-  let playpause = true;
+  let playpause = false;
   let value = "0";
   let sourceIndex = 0;
   let y = sourceIndex;
@@ -20,7 +20,10 @@
   let sources: Array<{ url: string; time: string }> = [];
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
+  import Image from "../Image.svelte";
+
   getUrls("radarsatellite-europe", "italy");
+
   function getUrls(type: string, region: string): void {
     for (let i = 0; i <= stepNum - 3; i++) {
       if (ora < 0) {
@@ -36,13 +39,14 @@
         sourceIndex -= minutes.length;
       }
       const url = getUrl(type, region, sourceIndex, ora);
+
       sources.push({ url: url["url"], time: `${ora}${minutes[sourceIndex]}` });
       sourceIndex++;
     }
   }
 
   function changeMap(event: any): void {
-    if (showmap) {
+    if (showmap && $isPreviousMapLoaded) {
       sourceIndex =
         typeof event === "number" ? event : parseInt(event.target.value, 10);
       try {
@@ -60,6 +64,7 @@
         hours = String(parseInt(hours) - 24);
       }
       sourceTime = `${parseInt(hours, 10) + offset}:${minutes}`;
+      console.log($isPreviousMapLoaded);
     }
   }
 
@@ -135,7 +140,7 @@
         <button class="playpausebtn" on:click={playOrPause}
           ><i class="fa-solid fa-pause"></i></button
         >
-      {:else if playpause == false}
+      {:else}
         <button class="playpausebtn" on:click={playOrPause}
           ><i class="fa-solid fa-play"></i></button
         >
@@ -154,5 +159,7 @@
   {#if showOverlay}
     <img src={overlayItaly} id="overlay" alt="overlay" class="mapSize" />
   {/if}
-  <img src={source} id="source" alt="map" />
+  {#if source}
+    <Image src={source} />
+  {/if}
 </div>

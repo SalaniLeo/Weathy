@@ -14,21 +14,25 @@ const minutes = ["15", "30", "45", "00"];
 const now = new Date();
 const currentMinute = now.getMinutes();
 
-let time = currentMinute - 15;
+function getNum() {
+    let time = currentMinute - 18;
 
-let tmp = 4 * minutes.length;
+    let tmp = 4 * minutes.length;
 
-if (time > parseInt(minutes[0]) && time <= parseInt(minutes[1])) {
-    tmp = tmp;
-} else if (time > parseInt(minutes[1]) && time <= parseInt(minutes[2])) {
-    tmp = tmp + 1;
-} else if (time > parseInt(minutes[2]) && time <= parseInt(minutes[3])) {
-    tmp = tmp + 2;
-} else if (time < 0) {
-    tmp = tmp - 2;
+    if (time > parseInt(minutes[0]) && time <= parseInt(minutes[1])) {
+        tmp = tmp;
+    } else if (time > parseInt(minutes[1]) && time <= parseInt(minutes[2])) {
+        tmp = tmp + 1;
+    } else if (time > parseInt(minutes[2]) && time <= parseInt(minutes[3])) {
+        tmp = tmp + 2;
+    } else if (time > 0 && time < parseInt(minutes[0])) {
+        tmp = tmp - 1; // DONE
+    }
+
+    return tmp
 }
 
-export let stepNum = tmp
+export const stepNum = getNum()
 
 if (mese < 10) {
     // @ts-ignore
@@ -57,7 +61,7 @@ function getUrl(mapStyle, region, i, ora) {
     } else if (region == "europe") {
         zone = "/5/8/14/14/20";
     }
-    console.log(time.substring(0, 2), giorno, ieri)
+
     if (parseInt(time.substring(0, 2)) >= 20 && parseInt(time.substring(0, 2)) < 24) {
         // if (giorno - 1 == ieri) {
         //     giorno = giorno - 1
