@@ -13,7 +13,7 @@
 
 <slot></slot>
 
-<nav class="card">
+<nav class="card blurred fexpand fvertical nowrap">
     <div class="left fvertical">
         <a class="navElement" href="/"><i class="fa-solid fa-house"></i></a>
         <a class="navElement" href="/radar"><i class="fa-solid fa-satellite-dish"></i></a>
@@ -21,9 +21,10 @@
     <div class="center">
         <!-- svelte-ignore a11y-no-static-element-interactions -->
         <!-- svelte-ignore a11y-click-events-have-key-events -->
-        {#if hideWeatherLoc}
-            <b on:click={() => (hideWeatherLoc = false)}>{data.city}</b>
-        {/if}
+        <!-- {#if hideWeatherLoc} -->
+        <!-- on:click={() => (hideWeatherLoc = false)}     -->
+        <b style="cursor: pointer;">{data.city}</b>
+        <!-- {/if} -->
     </div>
     <div class="right fvertical">
         <div id="theme-select">
@@ -43,11 +44,11 @@
     </div>
 </nav>
 
-<div class:hideWeatherLoc={hideWeatherLoc} class="card info fvertical gap2">
+<!-- <div class:hideWeatherLoc={hideWeatherLoc} class="card info fvertical gap2">
     <button on:click={() => (hideWeatherLoc = true)}><i class="fa-solid fa-chevron-down"></i></button>
     <b>Weather in {data.city}</b>
     <button on:click={() => (showModal = true)}>Change</button>
-</div>
+</div> -->
 
 <Modal bind:showModal>
 	<h2 slot="header">
@@ -68,16 +69,15 @@
 </Modal>
 
 <style>
-    .hideWeatherLoc {
+    /* .hideWeatherLoc {
         display: none;
-    }
+    } */
     nav {
-        margin: 1rem;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
+        margin-bottom: 1rem;
         position: fixed;
         bottom: 0;
         display: flex;
+        width: 400px;
         align-items: center;
         flex-direction: row;
         gap: 1rem;
@@ -99,16 +99,18 @@
     p {
         margin: 0;
     }
-    .info {
+    /* .info {
         width: max-content;
         position: fixed;
         bottom: 0;
-        margin: 1rem;
+        margin-bottom: 1rem;
         gap: 1rem;
         align-items: center;
         justify-content: space-between;
         height: 35px;
-    }
+        left: 50%;
+        transform: translateX(-50%);
+    } */
     .optionsList{
         gap: 1rem;
     }
@@ -128,5 +130,10 @@
     }
     .navElement {
         font-size: 1.5rem;
+    }
+    @media only screen and (max-width: 825px) {
+        nav {
+            width: 80%;
+        }
     }
 </style>
