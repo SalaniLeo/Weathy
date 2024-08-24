@@ -3,6 +3,7 @@ import { writable } from "svelte/store";
 export const weather = writable()
 export let degreesUnit = "°C"
 export let speedUnit = "Km/h"
+export let localDates = []
 
 export function getDayName(unixTimestamp) {
     const date = new Date(unixTimestamp * 1000);
@@ -72,7 +73,7 @@ export function getImageUrls(hoursNumber) {
         urls.push(`${baseUrl}${getDate(minutesToAdd, now, hoursNumber)}${endUrl}`)
         minutesToAdd += 5
     })
-    // TOGLI ULTIMI LINK E FAI CARICARE IMMAGINI PIANO !!!!!!
+
     return urls
 }
 
@@ -104,6 +105,10 @@ function getDate(toAdd, now, hoursNumber) {
             day = pad(parseInt(day) + 1);
         }
     }
+
+    let tmp = pad((hours)+2) > 24 ? pad(((hours)+2)-24) : pad((hours)+2)
+
+    localDates.push(`${tmp}:${pad(minutes)}`)
 
     let date = `${year}${month}${day}${pad(hours)}${pad(minutes)}`
 

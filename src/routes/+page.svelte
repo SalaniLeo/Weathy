@@ -5,7 +5,8 @@
     import { base } from "$app/paths";
     import { weather } from '$lib/weather.js';
 	import { onMount } from 'svelte';
-
+    import { localDates } from '$lib/weather.js';
+    
     export let data;
 
     let urls = getImageUrls(3)
@@ -175,6 +176,7 @@ function playOrPause() {
                       bind:value
                       on:change={changeMap}
                     />
+                    <b>{localDates[index]}</b>
                   </div>
             {:else}
                 <div class="imagePlaceholder">
