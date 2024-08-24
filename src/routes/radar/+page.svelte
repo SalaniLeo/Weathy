@@ -18,19 +18,6 @@
             />
           </a>
         </div>
-  
-        <!-- <div class="mapWidgetContainer">
-          <p>Radar USA weather.gov</p>
-          <a
-            href="javascript:window.open('https://radar.weather.gov/ridge/standard/CONUS_loop.gif','','scrollbars=no,width=1265,height=955');void('');"
-          >
-            <img
-              class="mapWidget"
-              src="https://radar.weather.gov/ridge/standard/CONUS_loop.gif"
-              alt="ingrandisci"
-            />
-          </a>
-        </div> -->
       </div>
     </div>
   </div>
