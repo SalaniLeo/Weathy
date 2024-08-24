@@ -28,6 +28,7 @@
     --background-color: white;
     --on-background-color: #d2d2d2;
     --slot-background-color: #d2d2d2;
+    --hover-background-color: #c9c9c9;
 
     --outline-soft: 2px solid #5c5c5c;
     --border-radius-light: 6px;
@@ -64,6 +65,14 @@ body {
     flex-wrap: wrap;
 }
 
+.nowrap {
+    flex-wrap: nowrap !important;
+}
+
+.fexpand {
+    justify-content: space-between;
+}
+
 .fhorizontal {
     display: flex;
     flex-direction: column;
@@ -77,9 +86,11 @@ body {
     gap: 1rem;
 }
 
-#weatherMain {
-    gap: 2rem;
+.vcenter {
+    display: flex;
+    align-items: center;
 }
+
 .blurred{
     background-color: var(--on-background-color-blur) !important;
     backdrop-filter: blur(5px);
@@ -115,16 +126,14 @@ body {
     display: flex;
     align-items: center;
 }
-#dailyForecast {
+#daily {
     gap: 1rem;
 }
 .forecast_icon {
     width: 3rem;
 }
-.dayName {
-    width: 110px;
-}
 button {
+    -webkit-tap-highlight-color: transparent;
     background-color: var(--on-background-color);
     outline: var(--outline-soft);
     width: fit-content;
@@ -147,4 +156,10 @@ input[type='text'] {
     border: none;
     border-radius: var(--border-radius-light);
     cursor: pointer;
+}
+
+@media only screen and (max-width: 825px) {
+    .card {
+        background-color: var(--on-background-color-blur);
+    }
 }

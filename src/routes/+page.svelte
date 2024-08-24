@@ -13,6 +13,8 @@
     urls.splice(-1)
     urls.splice(-1)
 
+    let carouselShow = [false, true]
+    let imageWitdth: number;
     let index = 0
     let url = urls[index]
 
@@ -105,11 +107,11 @@ function playOrPause() {
 
 </script>
 
-<div class="root fvertical">
-    <div class="first fhorizontal" id="weatherMain">
+<div class="root fvertical gap2 fexpand">
+    <div class="first fhorizontal gap2" id="weatherMain">
         <div class="first fhorizontal gap2">
             <div class="first">
-                <div class="onbackground card fvertical">
+                <div class="onbackground card fvertical" id="mainWidget">
                     <div class="first">
                         <img id="now_icon" src={base + "/icons/" + icon} alt="icon"/>
                     </div>
@@ -124,42 +126,48 @@ function playOrPause() {
                     </div>
                 </div>
             </div>
-            <!-- <div class="second fhorizontal gap1 card" id="hourly">
-                {#each hourlyData as hourly}
-                    <div class="hour fvertical">
-                        <div class="first">
-                            <div class="fvertical hourheader">
-                                <img class="forecast_icon" src={base + "/icons/" + mapWeatherIconToName(hourly['weather']['0']['icon'])} alt="icon"/>
-                                <p class="hourName">{getHour(hourly.dt)}</p>
-                                <div class="gap1 fvertical">{Math.round(hourly.temp)} {degreesUnit}</div>
-                            </div>
-                        </div>
-                    </div>
-                {/each}
-            </div> -->
         </div>
-        <div class="second">
-            <div class="card fhorizontal" id="dailyForecast">
-                {#each forecastData as daily}
-                        <div class="day fvertical gap1">
-                            <div class="fvertical dayheader">
-                                <img class="forecast_icon" src={base + "/icons/" + mapWeatherIconToName(daily['weather']['0']['icon'])} alt="icon"/>
-                                <p class="dayName">{getDayName(daily.dt)}</p>
+        <div class="second fhorizontal gap2">
+            <div id="buttons">
+                <button class="btnLeft" class:active={carouselShow[1]} on:click={() => {carouselShow[0] = false; carouselShow[1] = true}}>Hourly</button>
+                <button class="btnRight" class:active={carouselShow[0]} on:click={() => {carouselShow[0] = true; carouselShow[1] = false}}>Daily</button>
+            </div>
+            <div id="carousel">
+                <div class:hide={carouselShow[1]} class="first card fhorizontal forecastCard" id="daily">
+                    {#each forecastData as daily}
+                            <div class="day fvertical gap1 fexpand">
+                                <div class="fvertical dayheader">
+                                    <img class="forecast_icon" src={base + "/icons/" + mapWeatherIconToName(daily['weather']['0']['icon'])} alt="icon"/>
+                                    <p class="dayName vcenter">{getDayName(daily.dt)}</p>
+                                </div>
+                                <div class="fvertical gap1 vcenter dayPrecip">
+                                    <i class="fa-solid fa-droplet"></i><p>{(daily.pop)*100}%</p>
+                                </div>
+                                <div class="fhorizontal">
+                                    <div class="gap1 fvertical"><i class="fa-solid fa-chevron-up"></i>{Math.round(daily.temp.max)} {degreesUnit}</div>
+                                    <div class="gap1 fvertical"><i class="fa-solid fa-chevron-down"></i>{Math.round(daily.temp.min)} {degreesUnit}</div>
+                                </div>
                             </div>
-                            <div class="fhorizontal">
-                                <div class="gap1 fvertical"><i class="fa-solid fa-chevron-up"></i>{Math.round(daily.temp.max)} {degreesUnit}</div>
-                                <div class="gap1 fvertical"><i class="fa-solid fa-chevron-down"></i>{Math.round(daily.temp.min)} {degreesUnit}</div>
-                            </div>
+                    {/each}
+                </div>
+                <div class:hide={carouselShow[0]} class="second fhorizontal gap1 card forecastCard" id="hourly">
+                    {#each hourlyData as hourly}
+                        <div class="fvertical fexpand fill vcenter">
+                            <img class="forecast_icon" src={base + "/icons/" + mapWeatherIconToName(hourly['weather']['0']['icon'])} alt="icon"/>
+                            <p class="hourName">{getHour(hourly.dt)}</p>
+                            <div class="fvertical gap1"><i class="fa-solid fa-droplet"></i><p>{(hourly.pop)*100}%</p></div>
+                            <div class="gap1 fvertical" style="width: 50px;">{Math.round(hourly.temp)} {degreesUnit}</div>
                         </div>
-                {/each}
+                    {/each}
+                </div>
             </div>
         </div>
     </div>
     <div class="second" id="satelliteMain">
-        <div class="card">
+        <div class="card" bind:clientWidth={imageWitdth}>
             {#if allImagesLoaded}
                 <img class="satelliteImage" src={url} alt={'a'} />
-                <div class="timebar card blurred" style="display: flex; align-items: center;">
+                <div class="timebar card blurred" style="display: flex; align-items: center; width: {imageWitdth-65}px !important; transition-duration: 0s">
                     {#if !stopMaps}
                         <button class="playpausebtn blurred" on:click={playOrPause}
                         ><i class="fa-solid fa-pause"></i></button
@@ -188,15 +196,61 @@ function playOrPause() {
 </div>
 
 <style>
-    .root {
-        justify-content: space-between;
+    .hourName {
+        width: 50px;
+    }
+    .btnLeft {
+        border-radius: unset;
+        width: 4.5rem;
+        border-top-left-radius: var(--border-radius-normal);
+        border-bottom-left-radius: var(--border-radius-normal);
+    }
+    .btnRight {
+        width: 4.5rem;
+        border-radius: unset;
+        border-top-right-radius: var(--border-radius-normal);
+        border-bottom-right-radius: var(--border-radius-normal);
+    }
+    .day {
+        align-items: center;
+    }
+    .dayName {
+        width: unset;
+        min-width: 110px;
+    }
+    .dayPrecip {
+        width: 60px;
+    }
+    #buttons {
+        gap: 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .active {
+        background-color: var(--hover-background-color);
+    }
+    .hide {
+        display: none;
+        transition-duration: 1s;
+    }
+    #carousel > div {
+        position: relative;
+    }
+    #carousel {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .satelliteImage {
         border-radius: var(--border-radius-light);
-        width: 48rem;
+        max-width: 48rem;
+        width: 100%;
     }
     .imagePlaceholder {
-        width: 48rem;
+        max-width: 48rem;
+        width: 100%;
         height: 884px;
         display: flex;
         justify-content: center;
@@ -206,11 +260,13 @@ function playOrPause() {
         position: absolute;
         transform: translate(7.5px, -64px);
         padding: 0.5rem;
-        width: 46rem;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 1rem;
+    }
+    .timebar * {
+        color: white !important;
     }
     input {
         -webkit-appearance: none;
@@ -239,58 +295,30 @@ function playOrPause() {
     .timebar > button {
         width: 35px;
     }
-    @media only screen and (max-width: 825px) {
-    .satelliteImage {
-        border-radius: var(--border-radius-light);
-        width: 100%;
-    }
-    .imagePlaceholder {
-        width: 48rem;
-        height: 884px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-}
 
-@media only screen and (max-width: 480px) {
-    #satelliteMain {
-        margin-bottom: 80px;
+    @media only screen and (max-width: 825px) {
+        #mainWidget, .forecastCard {
+            background-color: transparent;
+            outline: none;
+        }
+        button {
+            background-color: transparent;
+        }
+        .dayName {
+            width: unset;
+            min-width: 90px;
+            font-size: 0.9rem;
+        }
+        #satelliteMain {
+            margin-bottom: 80px;
+        }
     }
-    .timebar {
-        width: 75%;
+
+    @media only screen and (max-width: 480px) {
+        .dayheader {
+            flex-wrap: nowrap;
+            gap: 0.5rem;
+        }
     }
-    /* #weatherMain > .first {
-        width: min-content !important;
-    }
-    #weatherMain {
-        flex-wrap: nowrap !important;
-        flex-direction: row;
-        gap: 1rem;
-    }
-    .dayheader {
-        flex-wrap: nowrap;
-        gap: 0;
-        font-size: 0.8rem;
-    }
-    .dayName {
-        width: unset;
-    }
-    #hourly {
-        width: max-content;
-        justify-content: space-between !important;
-        display: flex;
-        flex-direction: column !important;
-        flex-wrap: nowrap;
-    }
-    .forecast_icon {
-        width: 10vw;
-    }
-    .hourheader {
-        width: 100%;
-        gap: 1rem;
-        width: max-content;
-    } */
-}
 
 </style>
