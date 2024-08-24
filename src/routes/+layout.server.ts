@@ -4,7 +4,7 @@ export async function load(event) {
 
     let user_ip = event.getClientAddress()
 
-    if(user_ip == '::ffff:127.0.0.1' || user_ip == '::ffff:192.168.50.92') {
+    if(user_ip == '::ffff:127.0.0.1') {
         user_ip = env.IP
     }
 
