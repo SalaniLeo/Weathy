@@ -4,7 +4,11 @@ export async function load(event) {
 
     let user_ip = event.getClientAddress()
 
-    const ipres = await fetch(`https://ipinfo.io/79.55.57.91/json?token=cd93e239213774`)
+    if(user_ip == '::ffff:127.0.0.1') {
+        user_ip = env.IP
+    }
+
+    const ipres = await fetch(`https://ipinfo.io/${user_ip}/json?token=cd93e239213774`)
     const ipData = await ipres.json();
     const loc = ipData.loc
     const city = ipData.city
