@@ -164,9 +164,9 @@ function playOrPause() {
         </div>
     </div>
     <div class="second" id="satelliteMain">
-        <div class="card" bind:clientWidth={imageWitdth}>
+        <div id="satelliteContainer" class:transparent={!allImagesLoaded} class="card" bind:clientWidth={imageWitdth}>
             {#if allImagesLoaded}
-                <img class="satelliteImage" src={url} alt={'a'} />
+                <img class="satelliteImage" src={url} alt={url} />
                 <div class="timebar card blurred" style="display: flex; align-items: center; width: {imageWitdth-65}px !important; transition-duration: 0s">
                     {#if !stopMaps}
                         <button class="playpausebtn blurred" on:click={playOrPause}
@@ -249,8 +249,7 @@ function playOrPause() {
         width: 100%;
     }
     .imagePlaceholder {
-        max-width: 48rem;
-        width: 100%;
+        width: 48rem;
         height: 884px;
         display: flex;
         justify-content: center;
@@ -311,6 +310,21 @@ function playOrPause() {
         }
         #satelliteMain {
             margin-bottom: 80px;
+        }
+        .imagePlaceholder {
+            max-width: 48rem;
+            width: 100% !important;
+            height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .imagePlaceholder h3{
+            width: 100%;
+        }
+        .transparent {
+            background-color: transparent;
+            outline: none;
         }
     }
 

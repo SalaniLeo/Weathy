@@ -23,7 +23,7 @@
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <!-- {#if hideWeatherLoc} -->
         <!-- on:click={() => (hideWeatherLoc = false)}     -->
-        <b style="cursor: pointer;">{data.city}</b>
+        <b style="cursor: pointer;" on:click={() => {showModal = true}}>{data.city}</b>
         <!-- {/if} -->
     </div>
     <div class="right fvertical">
