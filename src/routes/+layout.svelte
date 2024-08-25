@@ -1,13 +1,35 @@
 <script lang="ts">
-	import { weather } from '$lib/weather.js';
+	import  Cookies from 'js-cookie';
     import { setTheme, currentTheme } from '$lib/theme';
     import '../app.css'
-	import Dialog from '$lib/components/Modal.svelte';
 	import Modal from '$lib/components/Modal.svelte';
+	import { goto, invalidateAll } from '$app/navigation';
 
     export let data;
 	let showModal = false;
     let hideWeatherLoc = false
+    let weatherLocation = data.city
+    let weatherToken = ''
+
+    async function saveLocation(e:any) {
+		if(e.key == 'Enter') {
+            const respose = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${weatherLocation}&limit=5&appid=${data.token}`)
+            const responseData = await respose.json();
+
+            if (responseData[0]) {
+                Cookies.set('location', weatherLocation, { expires: 365 })
+                invalidateAll()
+            }
+        }
+    }
+
+    function saveToken(e:any) {
+		if(e.key == 'Enter') {
+            if(weatherToken.length == 32) {
+                Cookies.set('token', weatherToken, { expires: 365 })
+            }
+        }
+    }
 </script>
 
 
@@ -58,11 +80,11 @@
 	<div class="fhorizontal optionsList">
         <div class="fvertical">
             <div class="center text"><p>Location:</p></div>
-            <div class="center"><input type="text" name="location" id="locationInput"></div>
+            <div class="center"><input type="text" name="location" id="locationInput" bind:value={weatherLocation} on:keydown={saveLocation}></div>
         </div>
         <div class="fvertical">
             <div class="center text"><p>Api Token:</p></div>
-            <div class="center"><input type="text" name="location" id="locationInput"></div>
+            <div class="center"><input type="text" name="token" id="tokenInput" bind:value={weatherToken} on:keydown={saveToken}></div>
         </div>
     </div>
 
@@ -99,18 +121,6 @@
     p {
         margin: 0;
     }
-    /* .info {
-        width: max-content;
-        position: fixed;
-        bottom: 0;
-        margin-bottom: 1rem;
-        gap: 1rem;
-        align-items: center;
-        justify-content: space-between;
-        height: 35px;
-        left: 50%;
-        transform: translateX(-50%);
-    } */
     .optionsList{
         gap: 1rem;
     }
