@@ -141,7 +141,7 @@ function playOrPause() {
                                     <p class="dayName vcenter">{getDayName(daily.dt)}</p>
                                 </div>
                                 <div class="fvertical gap1 vcenter dayPrecip">
-                                    <i class="fa-solid fa-droplet"></i><p>{(daily.pop)*100}%</p>
+                                    <i class="fa-solid fa-droplet"></i><p>{Math.round((daily.pop)*100)}%</p>
                                 </div>
                                 <div class="fhorizontal">
                                     <div class="gap1 fvertical"><i class="fa-solid fa-chevron-up"></i>{Math.round(daily.temp.max)} {degreesUnit}</div>
