@@ -243,8 +243,11 @@ function playOrPause() {
         justify-content: center;
         align-items: center;
     }
+    #satelliteContainer {
+        padding-bottom: 0.6rem;
+    }
     .satelliteImage {
-        border-radius: var(--border-radius-light);
+        border-radius: var(--border-radius-normal);
         max-width: 48rem;
         width: 100%;
     }
@@ -262,6 +265,7 @@ function playOrPause() {
         display: flex;
         align-items: center;
         justify-content: center;
+        border-radius: var(--border-radius-light);
         gap: 1rem;
     }
     .timebar * {
