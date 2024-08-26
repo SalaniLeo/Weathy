@@ -13,7 +13,6 @@ export function getCookie(name){
 }
 
 export function setTheme(theme, save) {
-    console.log(theme)
     document.documentElement.dataset.theme = theme;
     currentTheme.set(theme);
     if (save) setCookie("theme", theme);
