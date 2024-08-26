@@ -1,12 +1,10 @@
 <script lang="ts">
-	import { lazyLoad } from '$lib/lazyload.js';
 	import { degreesUnit, getDayName, getHour, getImageUrls, speedUnit } from '$lib/weather.js';
 	import { mapWeatherIconToName, toTextualDescription } from '$lib/weather.js';
     import { base } from "$app/paths";
-    import { weather } from '$lib/weather.js';
 	import { onMount } from 'svelte';
     import { localDates } from '$lib/weather.js';
-    
+
     export let data;
 
     let urls = getImageUrls(3)
@@ -18,38 +16,19 @@
     let index = 0
     let url = urls[index]
 
-    let currentData: any;
-    let forecastData = data.weatherData.daily
-    let hourlyData = data.weatherData.hourly
-    hourlyData.splice(10, 48)
-
-    weather.set(data.weatherData.current)
-    weather.subscribe((value) => {
-        currentData = value
-    })
-
-    let icon = mapWeatherIconToName(currentData.weather[0].icon)
-
-    let temp = Math.round(currentData['temp'])
-    let feelsLike = Math.round(currentData['feels_like'])
-
-    let humidity = currentData['humidity']
-    let pressure = currentData['pressure']
-    let wind_speed = currentData['wind_speed']
-    let wind_deg = toTextualDescription(currentData['wind_deg'])
     let images = [];
     let allImagesLoaded = false;
 
     let total = urls.length
     let loaded = 0
 
-    function calcPercentage(num) {
+    function calcPercentage(num:number) {
         return Math.round((num / total) * 100)
     }
 
-    function preloadImages(urls) {
+    function preloadImages(urls: any) {
         return Promise.all(
-            urls.map((url) =>
+            urls.map((ur:any) =>
             new Promise((resolve, reject) => {
                 const img = new Image();
                 img.src = url;
@@ -113,15 +92,15 @@ function playOrPause() {
             <div class="first">
                 <div class="onbackground card fvertical" id="mainWidget">
                     <div class="first">
-                        <img id="now_icon" src={base + "/icons/" + icon} alt="icon"/>
+                        <img id="now_icon" src={base + "/icons/" + mapWeatherIconToName(data.weatherData.current.weather[0].icon)} alt="icon"/>
                     </div>
                     <div class="second fhorizontal">
-                        <h1>{temp} {degreesUnit}</h1>
-                        <h3>Feels like {feelsLike} {degreesUnit}</h3>
+                        <h1>{Math.round(data.weatherData.current['temp'])} {degreesUnit}</h1>
+                        <h3>Feels like {Math.round(data.weatherData.current['feels_like'])} {degreesUnit}</h3>
                         <div class="smalldata fhorizontal">
-                            <p>Wind: {wind_speed}{speedUnit} {wind_deg}</p>
-                            <small>Humidity: {humidity}%</small>
-                            <small>Pressure: {pressure}hPa</small>
+                            <p>Wind: {data.weatherData.current['wind_speed']}{speedUnit} {toTextualDescription(data.weatherData.current['wind_deg'])}</p>
+                            <small>Humidity: {data.weatherData.current['humidity']}%</small>
+                            <small>Pressure: {data.weatherData.current['pressure']}hPa</small>
                         </div>
                     </div>
                 </div>
@@ -134,7 +113,7 @@ function playOrPause() {
             </div>
             <div id="carousel">
                 <div class:hide={carouselShow[1]} class="first card fhorizontal forecastCard" id="daily">
-                    {#each forecastData as daily}
+                    {#each data.weatherData.daily as daily}
                             <div class="day fvertical gap1 fexpand">
                                 <div class="fvertical dayheader">
                                     <img class="forecast_icon" src={base + "/icons/" + mapWeatherIconToName(daily['weather']['0']['icon'])} alt="icon"/>
@@ -151,11 +130,11 @@ function playOrPause() {
                     {/each}
                 </div>
                 <div class:hide={carouselShow[0]} class="second fhorizontal gap1 card forecastCard" id="hourly">
-                    {#each hourlyData as hourly}
+                    {#each data.weatherData.hourly.slice(0, 8) as hourly}
                         <div class="fvertical fexpand fill vcenter">
                             <img class="forecast_icon" src={base + "/icons/" + mapWeatherIconToName(hourly['weather']['0']['icon'])} alt="icon"/>
                             <p class="hourName">{getHour(hourly.dt)}</p>
-                            <div class="fvertical gap1"><i class="fa-solid fa-droplet"></i><p>{(hourly.pop)*100}%</p></div>
+                            <div class="fvertical gap1"><i class="fa-solid fa-droplet"></i><p>{Math.round((hourly.pop)*100)}%</p></div>
                             <div class="gap1 fvertical" style="width: 50px;">{Math.round(hourly.temp)} {degreesUnit}</div>
                         </div>
                     {/each}

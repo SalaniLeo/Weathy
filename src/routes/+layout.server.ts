@@ -20,7 +20,7 @@ export async function load(event) {
     });
 
     if (!preloadCity) {
-        const ipres = await fetch(`https://ipinfo.io/${user_ip}/json?token=cd93e239213774`);
+        const ipres = await fetch(`https://ipinfo.io/${user_ip}/json?token=${env.IPINFO_TOKEN}`);
         const ipData = await ipres.json();
 
         loc = ipData.loc;
@@ -41,7 +41,7 @@ export async function load(event) {
     return { weatherData, city, token:preloadToken };
 }
 
-async function getWeather(loc, city, token) {
+async function getWeather(loc: any, city: string, token: unknown) {
     const weatherRes = await fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${loc.split(',')[0]}&lon=${loc.split(',')[1]}&units=metric&appid=${token}`);
     const weatherData = await weatherRes.json();
     return weatherData;
