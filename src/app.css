@@ -46,7 +46,7 @@
 * {
     color: var(--font-color);
     text-decoration: none;
-    transition-duration: 0.5s;
+    transition-duration: 0.25s;
 }
 
 body {

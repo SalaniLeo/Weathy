@@ -4,9 +4,9 @@ import { weatherLocation, weatherToken } from '$lib/weather.js';
 export async function load(event) {
     let user_ip = event.getClientAddress();
 
-    if (user_ip === '::ffff:127.0.0.1') {
+    // if (user_ip === '::ffff:127.0.0.1') {
         user_ip = env.IP;
-    }
+    // }
 
     let preloadCity, preloadToken;
     let loc, city, weatherData;

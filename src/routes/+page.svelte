@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { currentTheme } from '$lib/theme';
 	import { degreesUnit, getDayName, getHour, getImageUrls, speedUnit } from '$lib/weather.js';
 	import { mapWeatherIconToName, toTextualDescription } from '$lib/weather.js';
     import { base } from "$app/paths";
@@ -40,6 +41,17 @@
     }
 
     onMount(() => {
+
+        const themes = {
+            'light': '#ffffff',
+            'dark': '#000000'
+        }
+
+        currentTheme.subscribe((theme) => {
+            const themeColorMetaTag = document.querySelector('meta[name="theme-color"]');
+            themeColorMetaTag.setAttribute('content', themes[theme]);
+        })
+
         preloadImages(urls).then((loadedImages) => {
             images = loadedImages;
             allImagesLoaded = true;
