@@ -1,3 +1,4 @@
+import { env } from "$env/dynamic/private";
 import { currentTheme } from "$lib/theme";
 import { weatherLocation, weatherToken } from "$lib/weather";
 
@@ -13,7 +14,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     weatherLocation.set(location)
 
     if (token == undefined) {
-        weatherToken.set('72d251b81d30ef572ae667dfe6c4ee1a')
+        weatherToken.set(env.WEATHER_TOKEN)
     } else {
         weatherToken.set(token)
     }

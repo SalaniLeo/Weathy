@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { reloadWeather } from '$lib/weather.js';
 	import  Cookies from 'js-cookie';
     import { setTheme, currentTheme } from '$lib/theme';
     import '../app.css'
 	import Modal from '$lib/components/Modal.svelte';
-	import { goto, invalidateAll } from '$app/navigation';
+	import { invalidateAll } from '$app/navigation';
 
     export let data;
 	let showModal = false;
@@ -18,7 +19,8 @@
 
             if (responseData[0]) {
                 Cookies.set('location', weatherLocation, { expires: 365 })
-                invalidateAll()
+                reloadWeather.set(!$reloadWeather)
+                invalidateAll();
             }
         }
     }

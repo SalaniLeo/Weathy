@@ -3,6 +3,7 @@ import { writable } from "svelte/store";
 export const weather = writable()
 export const weatherLocation = writable()
 export const weatherToken = writable()
+export const reloadWeather = writable()
 export let degreesUnit = "°C"
 export let speedUnit = "Km/h"
 export let localDates = []
