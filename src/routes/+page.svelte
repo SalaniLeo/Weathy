@@ -22,13 +22,13 @@
     let total = urls.length
     let loaded = 0
 
-    function calcPercentage(num:number) {
+    function calcPercentage(num) {
         return Math.round((num / total) * 100)
     }
 
-    function preloadImages(urls: any) {
+    function preloadImages(urls) {
         return Promise.all(
-            urls.map((ur:any) =>
+            urls.map((url) =>
             new Promise((resolve, reject) => {
                 const img = new Image();
                 img.src = url;
