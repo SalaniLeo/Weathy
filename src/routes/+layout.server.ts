@@ -26,6 +26,7 @@ export async function load(event) {
         loc = ipData.loc;
         city = ipData.city;
     } else {
+        console.log(`http://api.openweathermap.org/geo/1.0/direct?q=${preloadCity}&limit=1&appid=${preloadToken}`)
         const resolveCityRes = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${preloadCity}&limit=1&appid=${preloadToken}`);
         const resolveCityData = await resolveCityRes.json();
 
