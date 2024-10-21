@@ -23,13 +23,13 @@
     let total = urls.length
     let loaded = 0
 
-    function calcPercentage(num) {
+    function calcPercentage(num: number) {
         return Math.round((num / total) * 100)
     }
 
-    function preloadImages(urls) {
+    function preloadImages(urls: any[]) {
         return Promise.all(
-            urls.map((url) =>
+            urls.map((url: string) =>
             new Promise((resolve, reject) => {
                 const img = new Image();
                 img.src = url;
@@ -49,6 +49,7 @@
 
         currentTheme.subscribe((theme) => {
             const themeColorMetaTag = document.querySelector('meta[name="theme-color"]');
+            //@ts-ignore
             themeColorMetaTag.setAttribute('content', themes[theme]);
         })
 
