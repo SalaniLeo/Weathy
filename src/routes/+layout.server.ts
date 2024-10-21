@@ -4,10 +4,6 @@ import { weatherLocation, weatherToken } from '$lib/weather.js';
 export async function load(event) {
     let user_ip = event.getClientAddress();
 
-    // if (user_ip === '::ffff:127.0.0.1') {
-        // user_ip = env.IP;
-    // }
-
     let preloadCity, preloadToken;
     let loc, city, weatherData;
 
@@ -20,13 +16,16 @@ export async function load(event) {
     });
 
     if (!preloadCity) {
-        const ipres = await fetch(`https://ipinfo.io/${user_ip}/json?token=${env.IPINFO_TOKEN}`);
-        const ipData = await ipres.json();
-
-        loc = ipData.loc;
-        city = ipData.city;
+        if(user_ip != '::ffff:127.0.0.1') {
+            const ipres = await fetch(`https://ipinfo.io/${user_ip}/json`);
+            const ipData = await ipres.json();
+            loc = ipData.loc;
+            city = ipData.city;
+        } else {
+            loc = '44.4667,11.4333'
+            city = 'Ferrara'
+        }
     } else {
-        console.log(`http://api.openweathermap.org/geo/1.0/direct?q=${preloadCity}&limit=1&appid=${preloadToken}`)
         const resolveCityRes = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${preloadCity}&limit=1&appid=${preloadToken}`);
         const resolveCityData = await resolveCityRes.json();
 
@@ -39,7 +38,7 @@ export async function load(event) {
     }
 
     weatherData = await getWeather(loc, city, preloadToken);
-    return { weatherData, city, token:preloadToken };
+    return { weatherData, city, token:preloadToken, origin:event.url.origin };
 }
 
 async function getWeather(loc: any, city: string, token: unknown) {

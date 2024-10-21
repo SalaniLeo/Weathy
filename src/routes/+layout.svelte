@@ -34,6 +34,9 @@
     }
 </script>
 
+{#if !data.origin.includes('localhost')}
+    <script defer src="https://analytics.salanileo.dev/script.js" data-website-id="11c5e181-3aad-4d0e-b532-33ac0cb973fb"></script>
+{/if}
 
 <slot></slot>
 
