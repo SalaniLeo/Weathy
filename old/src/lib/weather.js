@@ -6,18 +6,30 @@ export const weatherToken = writable()
 export const reloadWeather = writable()
 export let degreesUnit = "°C"
 export let speedUnit = "Km/h"
+/**
+ * @type {any[]}
+ */
 export let localDates = []
 
+/**
+ * @param {number} unixTimestamp
+ */
 export function getDayName(unixTimestamp) {
     const date = new Date(unixTimestamp * 1000);
     return new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(date);
 }
 
+/**
+ * @param {number} unixTimestamp
+ */
 export function getHour(unixTimestamp) {
     const date = new Date(unixTimestamp * 1000);
     return new Intl.DateTimeFormat('en-US', { hour: 'numeric', hour12: true }).format(date);
 }
 
+/**
+ * @param {string | number} icon
+ */
 export function mapWeatherIconToName(icon) {
     const iconToName = {
         "01d": "clear-day.svg",
@@ -39,9 +51,13 @@ export function mapWeatherIconToName(icon) {
         "50d": "fog-day.svg",
         "50n": "fog-night.svg",
     };
+// @ts-ignore
 return iconToName[icon] || "weather-clear.svg";
 }
 
+/**
+ * @param {number} degree
+ */
 export function toTextualDescription(degree) {
     if (degree > 337.5) return "Northerly";
     if (degree > 292.5) return "North W";
@@ -60,6 +76,9 @@ const baseIntervals = ['05', '10', '15', '20', '25', '30', '35', '40', '45', '50
 const baseUrl = 'https://imn-api.meteoplaza.com/v4/nowcast/tiles/satellite-europe/'
 const endUrl = '/7/43/65/51/72?outputtype=jpeg'
 
+/**
+ * @param {number} hoursNumber
+ */
 export function getImageUrls(hoursNumber) {
 
     const intervals = Array(hoursNumber).fill(baseIntervals).flat();
@@ -70,6 +89,9 @@ export function getImageUrls(hoursNumber) {
     // const start = (currentMinutes - (currentMinutes % 5)) / 5
 
     let minutesToAdd = 0
+    /**
+     * @type {string[]}
+     */
     let urls = []
 
     intervals.forEach(() => {
@@ -80,10 +102,18 @@ export function getImageUrls(hoursNumber) {
     return urls
 }
 
+/**
+ * @param {string | number} number
+ */
 function pad(number) {
-    return number < 10 ? '0' + number : number.toString();
+    return Number(number) < 10 ? '0' + number : number.toString();
 }
 
+/**
+ * @param {number} toAdd
+ * @param {Date} now
+ * @param {number} hoursNumber
+ */
 function getDate(toAdd, now, hoursNumber) {
     let minutesChanged = false;
 
@@ -109,7 +139,7 @@ function getDate(toAdd, now, hoursNumber) {
         }
     }
 
-    let tmp = pad((hours)+2) > 24 ? pad(((hours)+2)-24) : pad((hours)+2)
+    let tmp = Number(pad((hours)+2)) > 24 ? pad(((hours)+2)-24) : pad((hours)+2)
 
     localDates.push(`${tmp}:${pad(minutes)}`)
 

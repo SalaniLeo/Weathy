@@ -10,6 +10,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     let location = event.cookies.get("location");
     let token = event.cookies.get("token");
 
+    // @ts-ignore
     currentTheme.set(cookieTheme)
     weatherLocation.set(location)
 

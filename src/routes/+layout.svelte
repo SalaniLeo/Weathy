@@ -1,154 +1,57 @@
 <script lang="ts">
-	import { reloadWeather } from '$lib/weather.js';
-	import  Cookies from 'js-cookie';
-    import { setTheme, currentTheme } from '$lib/theme';
-    import '../app.css'
-	import Modal from '$lib/components/Modal.svelte';
-	import { invalidateAll } from '$app/navigation';
+	import Sidebar from './../lib/components/sidebar.svelte';
+	import favicon from '$lib/assets/favicon.svg';
 
-    export let data;
-	let showModal = false;
-    let hideWeatherLoc = false
-    let weatherLocation = data.city
-    let weatherToken = ''
+	let { children, data } = $props();
+	let showsidebar = $state(false);
 
-    async function saveLocation(e:any) {
-		if(e.key == 'Enter') {
-            const respose = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${weatherLocation}&limit=5&appid=${data.token}`)
-            const responseData = await respose.json();
-
-            if (responseData[0]) {
-                Cookies.set('location', weatherLocation, { expires: 365 })
-                reloadWeather.set(!$reloadWeather)
-                invalidateAll();
-            }
-        }
-    }
-
-    function saveToken(e:any) {
-		if(e.key == 'Enter') {
-            if(weatherToken.length == 32) {
-                Cookies.set('token', weatherToken, { expires: 365 })
-            }
-        }
-    }
 </script>
 
-{#if !data.origin.includes('localhost')}
-    <script defer src="https://analytics.salanileo.dev/script.js" data-website-id="11c5e181-3aad-4d0e-b532-33ac0cb973fb"></script>
-{/if}
+<svelte:head>
+	<link rel="icon" href={favicon} />
+</svelte:head>
 
-<slot></slot>
 
-<nav class="card blurred fexpand fvertical nowrap">
-    <div class="left fvertical">
-        <a class="navElement" href="/"><i class="fa-solid fa-house"></i></a>
-        <a class="navElement" href="/radar"><i class="fa-solid fa-satellite-dish"></i></a>
-    </div>
-    <div class="center">
-        <!-- svelte-ignore a11y-no-static-element-interactions -->
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <!-- {#if hideWeatherLoc} -->
-        <!-- on:click={() => (hideWeatherLoc = false)}     -->
-        <b style="cursor: pointer;" on:click={() => {showModal = true}}>{data.city}</b>
-        <!-- {/if} -->
-    </div>
-    <div class="right fvertical">
-        <div id="theme-select">
-            {#if $currentTheme == 'light'}
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <!-- svelte-ignore a11y-no-static-element-interactions -->
-                <i class="fa-regular fa-moon themer" on:click={() => setTheme('dark', true)}></i>
-            {:else}
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <!-- svelte-ignore a11y-no-static-element-interactions -->
-                <i class="fa-regular fa-sun themer" on:click={() => setTheme('light', true)}></i>
-            {/if}
-        </div>
-        <a class="navElement" id="github" href="https://www.github.com/salaniLeo"
-        ><i class="fa-brands fa-github" /></a
-      >
-    </div>
-</nav>
-
-<!-- <div class:hideWeatherLoc={hideWeatherLoc} class="card info fvertical gap2">
-    <button on:click={() => (hideWeatherLoc = true)}><i class="fa-solid fa-chevron-down"></i></button>
-    <b>Weather in {data.city}</b>
-    <button on:click={() => (showModal = true)}>Change</button>
-</div> -->
-
-<Modal bind:showModal>
-	<h2 slot="header">
-		Settings
-	</h2>
-
-	<div class="fhorizontal optionsList">
-        <div class="fvertical">
-            <div class="center text"><p>Location:</p></div>
-            <div class="center"><input type="text" name="location" id="locationInput" bind:value={weatherLocation} on:keydown={saveLocation}></div>
-        </div>
-        <div class="fvertical">
-            <div class="center text"><p>Api Token:</p></div>
-            <div class="center"><input type="text" name="token" id="tokenInput" bind:value={weatherToken} on:keydown={saveToken}></div>
-        </div>
-    </div>
-
-</Modal>
+<div class="wrapper">
+	<div  class="flexrow gap2 vexpand">
+		<Sidebar bind:showsidebar data></Sidebar>
+		<div class="flexcolumn scroll margin2 gap2 hexpand">
+			<div class="show-sidebar halign valign hide-desktop show-mobile">
+				<!-- svelte-ignore a11y_click_events_have_key_events -->
+				<!-- svelte-ignore a11y_no_static_element_interactions -->
+				<svg
+					onclick={() => {
+						showsidebar = !showsidebar;
+					}}
+					class="pointer"
+					width="32"
+					viewBox="0 0 24 24"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+					><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+						id="SVGRepo_tracerCarrier"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					></g><g id="SVGRepo_iconCarrier">
+						<path
+							d="M11 5V19M6 8H8M6 11H8M6 14H8M6.2 19H17.8C18.9201 19 19.4802 19 19.908 18.782C20.2843 18.5903 20.5903 18.2843 20.782 17.908C21 17.4802 21 16.9201 21 15.8V8.2C21 7.0799 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V15.8C3 16.9201 3 17.4802 3.21799 17.908C3.40973 18.2843 3.71569 18.5903 4.09202 18.782C4.51984 19 5.07989 19 6.2 19Z"
+							stroke="var(--font-primary-color)"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						></path>
+					</g></svg>
+			</div>
+			{@render children()}
+		</div>
+	</div>
+</div>
 
 <style>
-    /* .hideWeatherLoc {
-        display: none;
-    } */
-    nav {
-        margin-bottom: 1rem;
-        position: fixed;
-        bottom: 0;
-        display: flex;
-        width: 400px;
-        align-items: center;
-        flex-direction: row;
-        gap: 1rem;
-        left: 50%;
-        height: 35px;
-        transform: translateX(-50%);
-    }
-    #theme-select {
-        width: 25px;
-        transform: translateY(2px);
-    }
-    .fa-regular {
-        cursor: pointer;
-        font-size: 1.5rem;
-    }
-    b {
-        font-weight: 500;
-    }
-    p {
-        margin: 0;
-    }
-    .optionsList{
-        gap: 1rem;
-    }
-    .text {
-        justify-content: start !important;
-        width: 80px;
-    }
-    .center {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .left, .right {
-        align-items: center;
-        flex-wrap: nowrap !important;
-        gap: 1rem;
-    }
-    .navElement {
-        font-size: 1.5rem;
-    }
-    @media only screen and (max-width: 825px) {
-        nav {
-            width: 80%;
-        }
-    }
+	.wrapper {
+		padding: 0 !important;
+		height: 100vh;
+		width: 100vw;
+		/* overflow: hidden; */
+	}
 </style>
